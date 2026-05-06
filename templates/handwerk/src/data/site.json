@@ -1,0 +1,85 @@
+{
+  "business": {
+    "name": "Müller Bau GmbH",
+    "tagline": "Ihr zuverlässiger Partner für Bau und Renovierung",
+    "address": "Hauptstraße 100, Berlin",
+    "phone": "030-98765432",
+    "hours": "Mo-Fr: 07:00 - 17:00 Uhr",
+    "category": "handwerk",
+    "city": "Berlin"
+  },
+  "content": {
+    "seo": {
+      "title": "Müller Bau GmbH - Professionelle Handwerksleistungen in Berlin",
+      "description": "Müller Bau GmbH bietet professionelle Handwerksleistungen in Berlin. Renovierung, Sanierung, Neubau - qualifiziert und zuverlässig.",
+      "keywords": [
+        "handwerk",
+        "bau",
+        "renovierung",
+        "berlin"
+      ]
+    },
+    "hero": {
+      "title": "Müller Bau GmbH",
+      "subtitle": "Professionelle Bau- und Renovierungsarbeiten mit Qualitätsgarantie in Berlin",
+      "cta": "Jetzt anfragen"
+    },
+    "about": {
+      "title": "Über uns",
+      "text": "Müller Bau GmbH ist Ihr zuverlässiger Partner für professionelle Handwerksleistungen in Berlin. Mit jahrelanger Erfahrung und qualifizierten Mitarbeitern bieten wir höchste Qualität und Termintreue. Ihr Projekt ist bei uns in guten Händen."
+    },
+    "services": {
+      "title": "Unsere Leistungen",
+      "items": [
+        {
+          "name": "Beratung & Planung",
+          "description": "Kostenlose Erstberatung und detaillierte Projektplanung",
+          "price": "Kostenlos",
+          "icon": "📐"
+        },
+        {
+          "name": "Renovierung",
+          "description": "Komplettsanierung und Modernisierung von Wohn- und Geschäftsräumen",
+          "price": "auf Anfrage",
+          "icon": "🔨"
+        },
+        {
+          "name": "Neubau",
+          "description": "Professionelle Bauleistungen für Neubauvorhaben aller Art",
+          "price": "auf Anfrage",
+          "icon": "🏗️"
+        }
+      ]
+    },
+    "projects": {
+      "title": "Referenzprojekte",
+      "items": [
+        {
+          "title": "Badrenovierung Mitte",
+          "description": "Komplette Badrenovierung mit modernster Ausstattung",
+          "before_image": "https://images.unsplash.com/photo-1584622050111-993a426fbf0a?w=600&h=400&fit=crop",
+          "after_image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=400&fit=crop"
+        },
+        {
+          "title": "Küchensanierung Prenzlauer Berg",
+          "description": "Offene Küche mit hochwertigen Materialien",
+          "before_image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&h=400&fit=crop",
+          "after_image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Kontaktieren Sie uns"
+    }
+  },
+  "assets": {
+    "hero_image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop",
+    "about_image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop",
+    "gallery_images": [
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=600&fit=crop"
+    ]
+  }
+}

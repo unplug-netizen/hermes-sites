@@ -1,0 +1,45 @@
+{
+  "business": "Trattoria Bella Vista",
+  "site_url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+  "packages": {
+    "basic": {
+      "name": "Basic",
+      "price": 499,
+      "description": "5-Seiten-Website inkl. 1 Jahr Hosting",
+      "features": [
+        "5 professionelle Seiten",
+        "Mobile-optimiertes Design",
+        "SEO-Grundoptimierung",
+        "Kontaktformular",
+        "1 Jahr Hosting inklusive",
+        "SSL-Zertifikat"
+      ]
+    },
+    "business": {
+      "name": "Business",
+      "price": 99,
+      "description": "Monatliches Abo mit Updates & Support",
+      "features": [
+        "Alles aus Basic",
+        "Monatliche Content-Updates",
+        "SEO-Optimierung",
+        "Performance-Monitoring",
+        "E-Mail-Support",
+        "Backup & Wartung"
+      ]
+    },
+    "premium": {
+      "name": "Premium",
+      "price": 199,
+      "description": "Custom Domain, Blog, Analytics",
+      "features": [
+        "Alles aus Business",
+        "Eigene Domain (.de / .com)",
+        "Blog-Funktion",
+        "Google Analytics",
+        "Erweitertes SEO",
+        "Prioritätssupport"
+      ]
+    }
+  }
+}

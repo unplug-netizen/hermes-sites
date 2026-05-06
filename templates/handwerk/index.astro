@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+
+import siteData from '../data/site.json';
+---
+
+<Layout 
+  title={`${siteData.business.name} - ${siteData.business.tagline}`}
+  description={siteData.content.seo.description}
+>
+  <Hero 
+    title={siteData.content.hero.title}
+    subtitle={siteData.content.hero.subtitle}
+    cta={siteData.content.hero.cta}
+    image={siteData.assets.hero_image}
+  />
+  
+  <About 
+    title={siteData.content.about.title}
+    text={siteData.content.about.text}
+    image={siteData.assets.about_image}
+  />
+  
+  <Services 
+    title={siteData.content.services.title}
+    items={siteData.content.services.items}
+  />
+  
+  <Projects 
+    title={siteData.content.projects.title}
+    projects={siteData.content.projects.items}
+  />
+  
+  <Contact 
+    title={siteData.content.contact.title}
+    address={siteData.business.address}
+    phone={siteData.business.phone}
+    hours={siteData.business.hours}
+  />
+</Layout>

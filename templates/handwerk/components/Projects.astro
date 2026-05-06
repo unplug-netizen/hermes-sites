@@ -1,0 +1,43 @@
+---
+export interface Props {
+  title: string;
+  projects: Array<{
+    title: string;
+    description: string;
+    before_image: string;
+    after_image: string;
+  }>;
+}
+
+const { title, projects } = Astro.props;
+---
+
+<section id="projekte" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h2>
+      <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      {projects.map((project) => (
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+          <div class="grid grid-cols-2 gap-1">
+            <div class="relative">
+              <img src={project.before_image} alt="Vorher" class="w-full h-48 object-cover" />
+              <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">VORHER</div>
+            </div>
+            <div class="relative">
+              <img src={project.after_image} alt="Nachher" class="w-full h-48 object-cover" />
+              <div class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded">NACHHER</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+            <p class="text-gray-600">{project.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
