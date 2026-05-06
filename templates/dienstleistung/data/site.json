@@ -1,0 +1,172 @@
+{
+  "business": {
+    "name": "Beispiel Kanzlei & Beratung",
+    "tagline": "Kompetente Beratung für Ihren Erfolg",
+    "address": "Musterstraße 1, 10115 Berlin",
+    "phone": "030-12345678",
+    "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
+    "category": "dienstleistung",
+    "city": "Berlin",
+    "email": "info@beispiel-beratung.de",
+    "founded": "2005",
+    "employees": "8",
+    "license": "Zugelassen bei der Industrie- und Handelskammer"
+  },
+  "content": {
+    "seo": {
+      "title": "Beispiel Kanzlei \u0026 Beratung - Ihr Partner in Berlin",
+      "description": "Professionelle Beratung und Dienstleistungen in Berlin. Steuerberatung, Rechtsanwaltskanzlei, Unternehmensberatung. Jetzt Termin vereinbaren!",
+      "keywords": ["Steuerberater Berlin", "Rechtsanwalt", "Unternehmensberatung", "Beratung"]
+    },
+    "hero": {
+      "title": "Beispiel Kanzlei \u0026 Beratung",
+      "subtitle": "Ihr vertrauensvoller Partner für Steuerberatung, Recht und Unternehmensberatung in Berlin",
+      "cta": "Termin vereinbaren",
+      "badge": "🏅 20 Jahre Erfahrung"
+    },
+    "about": {
+      "title": "Über uns",
+      "text": "Seit über 20 Jahren begleiten wir Unternehmen und Privatpersonen mit kompetenter Beratung. Unser Team aus erfahrenen Steuerberatern, Rechtsanwälten und Beratern steht Ihnen mit maßgeschneiderten Lösungen zur Seite. Vertrauen, Diskretion und Ergebnisorientierung sind die Grundpfeiler unserer Arbeit."
+    },
+    "trust": {
+      "title": "Warum unsere Mandanten uns vertrauen",
+      "badges": [
+        { "icon": "🏆", "label": "20+ Jahre Erfahrung", "sublabel": "Seit 2005" },
+        { "icon": "✅", "label": "Zertifiziert", "sublabel": "IHK-zugelassen" },
+        { "icon": "🛡️", "label": "Versichert", "sublabel": "Berufshaftpflicht" },
+        { "icon": "⭐", "label": "4.8/5 Sterne", "sublabel": "Über 200 Bewertungen" },
+        { "icon": "🤝", "label": "Persönliche Beratung", "sublabel": "Individuelle Lösungen" },
+        { "icon": "🔒", "label": "Diskretion", "sublabel": "Streng vertraulich" }
+      ]
+    },
+    "services": {
+      "title": "Unsere Leistungen",
+      "items": [
+        {
+          "name": "Steuerberatung",
+          "description": "Umfassende steuerliche Beratung für Unternehmen und Privatpersonen. Von der Buchführung bis zur Steuererklärung.",
+          "price": "auf Anfrage",
+          "icon": "📊",
+          "features": ["Buchführung", "Steuererklärung", "Lohnbuchhaltung"]
+        },
+        {
+          "name": "Rechtsberatung",
+          "description": "Kompetente rechtliche Beratung in allen zivil- und wirtschaftsrechtlichen Fragen. Vertragsgestaltung und Prozessvertretung.",
+          "price": "auf Anfrage",
+          "icon": "⚖️",
+          "features": ["Vertragsrecht", "Gesellschaftsrecht", "Arbeitsrecht"]
+        },
+        {
+          "name": "Unternehmensberatung",
+          "description": "Strategische Beratung für Unternehmen aller Größen. Von der Gründung bis zur Nachfolgeregelung.",
+          "price": "auf Anfrage",
+          "icon": "📈",
+          "features": ["Strategieberatung", "Gründungsberatung", "Nachfolgeplanung"]
+        },
+        {
+          "name": "Finanzplanung",
+          "description": "Individuelle Finanzplanung für Ihre Zukunft. Altersvorsorge, Vermögensaufbau und Risikoabsicherung.",
+          "price": "ab 299 €",
+          "icon": "💰",
+          "features": ["Altersvorsorge", "Vermögensplanung", "Risikoanalyse"]
+        },
+        {
+          "name": "Digitale Transformation",
+          "description": "Begleitung bei der Digitalisierung Ihres Unternehmens. Prozessoptimierung und IT-Strategie.",
+          "price": "auf Anfrage",
+          "icon": "💻",
+          "features": ["Prozessanalyse", "IT-Strategie", "Change Management"]
+        },
+        {
+          "name": "M \u0026 A Beratung",
+          "description": "Professionelle Begleitung bei Unternehmenskäufen und -verkäufen. Due Diligence und Verhandlungsführung.",
+          "price": "auf Anfrage",
+          "icon": "🤝",
+          "features": ["Due Diligence", "Bewertung", "Vertragsverhandlung"]
+        }
+      ]
+    },
+    "projects": {
+      "title": "Erfolgsgeschichten",
+      "subtitle": "Sehen Sie, wie wir unseren Mandanten geholfen haben",
+      "items": [
+        {
+          "title": "Steueroptimierung Mittelstand",
+          "description": "Reduzierung der Steuerlast um 35% durch strategische Neustrukturierung",
+          "before_image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600\u0026h=400\u0026fit=crop",
+          "after_image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600\u0026h=400\u0026fit=crop"
+        },
+        {
+          "title": "Unternehmensnachfolge",
+          "description": "Erfolgreiche Übergabe eines Familienunternehmens an die nächste Generation",
+          "before_image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600\u0026h=400\u0026fit=crop",
+          "after_image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600\u0026h=400\u0026fit=crop"
+        }
+      ]
+    },
+    "process": {
+      "title": "Unser Beratungsprozess",
+      "steps": [
+        { "number": "01", "title": "Erstgespräch", "text": "Kostenloses, unverbindliches Erstgespräch zur Analyse Ihrer Situation." },
+        { "number": "02", "title": "Analyse", "text": "Detaillierte Analyse Ihrer Unterlagen und Identifikation von Optimierungspotenzialen." },
+        { "number": "03", "title": "Konzept", "text": "Entwicklung eines maßgeschneiderten Konzepts mit konkreten Handlungsempfehlungen." },
+        { "number": "04", "title": "Umsetzung", "text": "Professionelle Umsetzung mit laufender Betreuung und transparente Kommunikation." },
+        { "number": "05", "title": "Erfolgskontrolle", "text": "Regelmäßige Überprüfung der Ergebnisse und Anpassung der Strategie." }
+      ]
+    },
+    "testimonials": {
+      "title": "Das sagen unsere Mandanten",
+      "items": [
+        {
+          "name": "Dr. Weber GmbH",
+          "location": "Berlin-Charlottenburg",
+          "rating": 5,
+          "text": "Die Steuerberatung ist erstklassig. Wir sparen jährlich erhebliche Beträge und haben endlich Ruhe vor dem Finanzamt."
+        },
+        {
+          "name": "Familie Schmidt",
+          "location": "Potsdam",
+          "rating": 5,
+          "text": "Bei der Unternehmensnachfolge haben wir uns in den besten Händen gefühlt. Alles wurde perfekt begleitet."
+        },
+        {
+          "name": "TechStart UG",
+          "location": "Berlin-Kreuzberg",
+          "rating": 5,
+          "text": "Die Gründungsberatung war Gold wert. Von der Gesellschaftsform bis zur Finanzierung – alles perfekt abgestimmt."
+        },
+        {
+          "name": "Hans M.",
+          "location": "Berlin-Mitte",
+          "rating": 5,
+          "text": "Endlich eine Kanzlei, die komplexe Sachverhalte verständlich erklärt. Ich fühle mich bestens beraten."
+        }
+      ]
+    },
+    "quote": {
+      "title": "Kostenloses Erstgespräch vereinbaren",
+      "subtitle": "Rufen Sie uns an oder füllen Sie das Formular aus – wir melden uns umgehend bei Ihnen.",
+      "phone_cta": "030-12345678",
+      "form_fields": {
+        "name": "Ihr Name",
+        "email": "E-Mail-Adresse",
+        "phone": "Telefonnummer",
+        "service": "Gewünschte Beratung",
+        "message": "Ihr Anliegen"
+      }
+    },
+    "contact": {
+      "title": "Kontaktieren Sie uns"
+    }
+  },
+  "assets": {
+    "hero_image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920\u0026h=1080\u0026fit=crop",
+    "about_image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800\u0026h=600\u0026fit=crop",
+    "gallery_images": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600\u0026h=600\u0026fit=crop",
+      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600\u0026h=600\u0026fit=crop",
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600\u0026h=600\u0026fit=crop",
+      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600\u0026h=600\u0026fit=crop"
+    ]
+  }
+}
