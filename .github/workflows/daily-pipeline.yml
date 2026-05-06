@@ -1,0 +1,48 @@
+name: Hermes Daily Pipeline
+on:
+  schedule:
+    # Täglich um 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          npm ci
+          pip install -r requirements.txt
+
+      - name: Run Full Pipeline
+        run: python scripts/pipeline.py
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-sites
+          path: clients/
+
+      - name: Commit Results
+        run: |
+          git config user.name "Hermes Bot"
+          git config user.email "hermes@automation.local"
+          git add leads/ pipeline/
+          git diff --staged --quiet || git commit -m "🤖 Daily lead update $(date +%Y-%m-%d)"
+          git push

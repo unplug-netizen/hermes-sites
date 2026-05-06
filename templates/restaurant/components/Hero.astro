@@ -1,0 +1,45 @@
+---
+export interface Props {
+  title: string;
+  subtitle: string;
+  cta: string;
+  image: string;
+}
+
+const { title, subtitle, cta, image } = Astro.props;
+---
+
+<section class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src={image} 
+      alt="Hero Background" 
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+  </div>
+  
+  <!-- Content -->
+  <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+      {title}
+    </h1>
+    <p class="text-xl md:text-2xl text-white/90 mb-8 font-light">
+      {subtitle}
+    </p>
+    <a 
+      href="#kontakt" 
+      class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg"
+    >
+      {cta}
+    </a>
+  </div>
+  
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>

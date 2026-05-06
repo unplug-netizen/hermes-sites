@@ -1,0 +1,71 @@
+---
+name: Generate Client Site
+on:
+  workflow_dispatch:
+    inputs:
+      business_id:
+        description: 'Business ID / Slug'
+        required: true
+        type: string
+      city:
+        description: 'Stadt'
+        default: 'Berlin'
+        type: string
+      category:
+        description: 'Branche'
+        default: 'restaurant'
+        type: string
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          npm ci
+          pip install -r requirements.txt
+      
+      - name: Run Lead Research
+        run: python scripts/lead_scout.py --city ${{ inputs.city }} --category ${{ inputs.category }}
+      
+      - name: Generate Content
+        run: python scripts/generate_content.py --business ${{ inputs.business_id }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      
+      - name: Build Site
+        run: |
+          cp -r templates/${{ inputs.category }}/* clients/${{ inputs.business_id }}/
+          cd clients/${{ inputs.business_id }}
+          npm install
+          npm run build
+      
+      - name: Create Repository
+        run: |
+          gh repo create hermes-sites/${{ inputs.business_id }} --private --source=. --push
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v3
+        with:
+          path: clients/${{ inputs.business_id }}/dist
