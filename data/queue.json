@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-05-07T06:00:00Z",
+  "queue": [
+    {
+      "id": "trattoria-bella-vista",
+      "status": "live",
+      "stage": "completed",
+      "retry_count": 0,
+      "last_action": "2026-05-06T18:08:00Z",
+      "next_action": null
+    },
+    {
+      "id": "curry-house",
+      "status": "live",
+      "stage": "completed",
+      "retry_count": 0,
+      "last_action": "2026-05-06T18:08:00Z",
+      "next_action": null
+    },
+    {
+      "id": "mueller-elektro",
+      "status": "live",
+      "stage": "completed",
+      "retry_count": 0,
+      "last_action": "2026-05-06T18:08:00Z",
+      "next_action": "outreach"
+    }
+  ],
+  "pending_builds": [],
+  "pending_deploys": [],
+  "pending_outreach": ["mueller-elektro"]
+}

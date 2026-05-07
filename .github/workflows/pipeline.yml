@@ -1,0 +1,47 @@
+name: Full Pipeline
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          npm install -g astro
+          pip install requests beautifulsoup4
+      
+      - name: Step 1 — Lead Scout
+        run: python scripts/lead_scout.py
+      
+      - name: Step 2 — Build Queue
+        run: python scripts/build_site.py --queue
+      
+      - name: Step 3 — Deploy
+        run: python scripts/deploy.py --github-pages
+      
+      - name: Step 4 — Monitor
+        run: python scripts/monitor.py --all
+      
+      - name: Commit all changes
+        run: |
+          git config user.name "Hermes Bot"
+          git config user.email "bot@hermes-agent.dev"
+          git add .
+          git diff --cached --quiet || git commit -m "pipeline: full cycle $(date +%Y-%m-%d-%H:%M)"
+          git push

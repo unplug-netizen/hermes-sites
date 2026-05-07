@@ -1,0 +1,31 @@
+name: Lead Scout
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+      
+      - name: Run Lead Scout
+        run: python scripts/lead_scout.py
+      
+      - name: Commit results
+        run: |
+          git config user.name "Hermes Bot"
+          git config user.email "bot@hermes-agent.dev"
+          git add data/leads.json
+          git diff --cached --quiet || git commit -m "chore: neue Leads $(date +%Y-%m-%d)"
+          git push

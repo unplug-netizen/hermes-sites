@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-05-07T06:00:00Z",
+  "sites": [
+    {
+      "id": "trattoria-bella-vista",
+      "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+      "status": "up",
+      "http_code": 200,
+      "response_time_ms": 245,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "overall": 97
+      },
+      "last_check": "2026-05-07T06:00:00Z"
+    },
+    {
+      "id": "curry-house",
+      "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+      "status": "up",
+      "http_code": 200,
+      "response_time_ms": 198,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "overall": 97
+      },
+      "last_check": "2026-05-07T06:00:00Z"
+    },
+    {
+      "id": "mueller-elektro",
+      "url": "https://unplug-netizen.github.io/hermes-sites/mueller-elektro/",
+      "status": "up",
+      "http_code": 200,
+      "response_time_ms": 312,
+      "lighthouse": {
+        "performance": 92,
+        "accessibility": 94,
+        "best_practices": 100,
+        "seo": 96,
+        "overall": 95
+      },
+      "last_check": "2026-05-07T06:00:00Z"
+    }
+  ],
+  "summary": {
+    "total_sites": 3,
+    "up": 3,
+    "down": 0,
+    "avg_response_time_ms": 251,
+    "avg_lighthouse": 96.3
+  }
+}

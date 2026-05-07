@@ -1,0 +1,43 @@
+name: Build Site
+
+on:
+  workflow_dispatch:
+    inputs:
+      business_id:
+        description: 'Business ID to build'
+        required: true
+        type: string
+  schedule:
+    - cron: '0 */4 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          npm install -g astro
+          pip install requests
+      
+      - name: Build from queue
+        run: python scripts/build_site.py --queue
+      
+      - name: Commit build
+        run: |
+          git config user.name "Hermes Bot"
+          git config user.email "bot@hermes-agent.dev"
+          git add clients/ data/queue.json
+          git diff --cached --quiet || git commit -m "build: neue Sites $(date +%Y-%m-%d-%H:%M)"
+          git push

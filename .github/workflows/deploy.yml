@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    paths:
+      - 'clients/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Deploy to GitHub Pages
+        run: python scripts/deploy.py --github-pages
+      
+      - name: Commit docs
+        run: |
+          git config user.name "Hermes Bot"
+          git config user.email "bot@hermes-agent.dev"
+          git add docs/ data/queue.json
+          git diff --cached --quiet || git commit -m "deploy: Sites live $(date +%Y-%m-%d-%H:%M)"
+          git push
