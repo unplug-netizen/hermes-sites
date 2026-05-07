@@ -11,7 +11,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-BASE_DIR = Path("/root/hermes-sites")
+BASE_DIR = Path(__file__).parent.parent.resolve()
 CLIENTS_DIR = BASE_DIR / "clients"
 DOCS_DIR = BASE_DIR / "docs"
 DATA_DIR = BASE_DIR / "data"
