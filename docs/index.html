@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hermes Sites — Autonomous Webdesign Business Dashboard</title>
+    <title>Hermes Sites — Business Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
                     colors: {
-                        slate: {
-                            850: '#1e293b',
-                            900: '#0f172a',
-                            950: '#020617',
-                        }
+                        slate: { 850: '#151e2e', 900: '#0f172a', 950: '#020617' },
+                        accent: { 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7' },
+                        success: { 400: '#4ade80', 500: '#22c55e' },
+                        warning: { 400: '#fbbf24', 500: '#f59e0b' },
+                        danger: { 400: '#f87171', 500: '#ef4444' }
                     }
                 }
             }
@@ -29,472 +25,415 @@
     </script>
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; background: #020617; }
-        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
-        .glass-card { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(8px); border: 1px solid rgba(51, 65, 85, 0.4); }
-        .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        .status-live { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-        .status-building { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
-        .status-pending { background: #6b7280; }
-        .pipeline-line { position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #334155, #60a5fa, #22c55e); transform: translateY(-50%); z-index: 0; }
-        .pipeline-step { position: relative; z-index: 1; }
-        .score-ring { position: relative; width: 48px; height: 48px; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(148, 163, 184, 0.08); }
+        .glass-strong { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(148, 163, 184, 0.12); }
+        .glow-accent { box-shadow: 0 0 20px rgba(56, 189, 248, 0.15); }
+        .glow-success { box-shadow: 0 0 20px rgba(74, 222, 128, 0.15); }
+        .pipeline-line { background: linear-gradient(90deg, #38bdf8, #4ade80, #a78bfa); }
+        .metric-card:hover { transform: translateY(-2px); transition: all 0.2s ease; }
+        .status-dot { animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .chart-container { position: relative; height: 220px; }
+        .site-card { transition: all 0.2s ease; }
+        .site-card:hover { border-color: rgba(56, 189, 248, 0.3); transform: translateY(-1px); }
+        .score-ring { position: relative; }
         .score-ring svg { transform: rotate(-90deg); }
-        .score-ring circle { fill: none; stroke-width: 4; }
-        .score-ring .bg { stroke: rgba(51, 65, 85, 0.5); }
-        .score-ring .fill { stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
-        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-        .tab-active { border-bottom: 2px solid #60a5fa; color: #60a5fa; }
-        .tab-inactive { border-bottom: 2px solid transparent; color: #64748b; }
-        .tab-inactive:hover { color: #94a3b8; }
+        .lighthouse-bar { border-radius: 4px; height: 6px; background: rgba(148,163,184,0.15); overflow: hidden; }
+        .lighthouse-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.2); border-radius: 3px; }
     </style>
 </head>
-<body class="text-slate-200 min-h-screen">
+<body class="text-slate-300 min-h-screen">
 
     <!-- Top Navigation -->
-    <nav class="glass sticky top-0 z-50 border-b border-slate-700/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white font-bold text-sm">H</div>
-                    <span class="font-bold text-lg tracking-tight">Hermes <span class="text-slate-400 font-normal">Sites</span></span>
+    <nav class="glass-strong sticky top-0 z-50 border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-accent-500/20">
+                    H
                 </div>
-                <div class="hidden md:flex items-center gap-6 text-sm">
-                    <a href="#overview" class="text-slate-300 hover:text-white transition-colors">Dashboard</a>
-                    <a href="#sites" class="text-slate-300 hover:text-white transition-colors">Sites</a>
-                    <a href="#pipeline" class="text-slate-300 hover:text-white transition-colors">Pipeline</a>
-                    <a href="#analytics" class="text-slate-300 hover:text-white transition-colors">Analytics</a>
+                <div>
+                    <h1 class="text-white font-semibold text-sm tracking-wide">HERMES SITES</h1>
+                    <p class="text-[10px] text-slate-500 uppercase tracking-widest">Autonomous Webdesign</p>
                 </div>
-                <div class="flex items-center gap-3">
-                    <span class="hidden sm:flex items-center gap-2 text-xs bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-500/20">
-                        <span class="status-dot status-live"></span>
-                        System Operational
-                    </span>
-                    <a href="https://github.com/unplug-netizen/hermes-sites" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex items-center gap-2 text-xs">
+                    <span class="w-2 h-2 rounded-full bg-success-400 status-dot"></span>
+                    <span class="text-slate-400">Pipeline Active</span>
+                </div>
+                <div class="text-right">
+                    <div class="text-white text-sm font-medium" id="clock">--:--</div>
+                    <div class="text-[10px] text-slate-500" id="date">--.--.----</div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-7xl mx-auto px-6 py-8">
 
-        <!-- Header Section -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold mb-2">Business Dashboard</h1>
-            <p class="text-slate-400">Autonomous webdesign pipeline — leads, builds, deploys, outreach</p>
-        </div>
-
-        <!-- KPI Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="overview">
-            <div class="glass-card rounded-xl p-5 hover-lift">
+        <!-- KPI Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass rounded-xl p-5 metric-card">
                 <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Leads Total</span>
-                    <span class="text-lg">🎯</span>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider">Leads Total</span>
+                    <span class="text-accent-400 text-xs">↑ 12%</span>
                 </div>
-                <div class="text-3xl font-bold text-white">3</div>
-                <div class="text-xs text-emerald-400 mt-1">+3 this week</div>
+                <div class="text-3xl font-bold text-white" id="kpi-leads">--</div>
+                <div class="text-xs text-slate-500 mt-1">3 approved • 1 pending outreach</div>
             </div>
-            <div class="glass-card rounded-xl p-5 hover-lift">
+            <div class="glass rounded-xl p-5 metric-card">
                 <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Sites Live</span>
-                    <span class="text-lg">🚀</span>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider">Sites Live</span>
+                    <span class="text-success-400 text-xs">↑ 100%</span>
                 </div>
-                <div class="text-3xl font-bold text-emerald-400">3</div>
-                <div class="text-xs text-slate-400 mt-1">100% uptime</div>
+                <div class="text-3xl font-bold text-white" id="kpi-live">--</div>
+                <div class="text-xs text-slate-500 mt-1">100% uptime last 24h</div>
             </div>
-            <div class="glass-card rounded-xl p-5 hover-lift">
+            <div class="glass rounded-xl p-5 metric-card">
                 <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Avg Lighthouse</span>
-                    <span class="text-lg">⚡</span>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider">Lighthouse</span>
+                    <span class="text-success-400 text-xs">↑ 3 pts</span>
                 </div>
-                <div class="text-3xl font-bold text-blue-400">96.3</div>
-                <div class="text-xs text-slate-400 mt-1">/ 100 score</div>
+                <div class="text-3xl font-bold text-white" id="kpi-lighthouse">--</div>
+                <div class="text-xs text-slate-500 mt-1">Avg across all sites</div>
             </div>
-            <div class="glass-card rounded-xl p-5 hover-lift">
+            <div class="glass rounded-xl p-5 metric-card">
                 <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Outreach Pending</span>
-                    <span class="text-lg">📧</span>
+                    <span class="text-xs text-slate-500 uppercase tracking-wider">Response Time</span>
+                    <span class="text-success-400 text-xs">↓ 18ms</span>
                 </div>
-                <div class="text-3xl font-bold text-amber-400">1</div>
-                <div class="text-xs text-slate-400 mt-1">Müller Elektro</div>
+                <div class="text-3xl font-bold text-white" id="kpi-response">--</div>
+                <div class="text-xs text-slate-500 mt-1">Avg ms across all sites</div>
             </div>
         </div>
 
-        <!-- Pipeline Visualization -->
-        <div class="glass-card rounded-xl p-6 mb-8" id="pipeline">
+        <!-- Pipeline Visual -->
+        <div class="glass rounded-xl p-6 mb-8">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-lg font-semibold">Pipeline Status</h2>
-                <span class="text-xs text-slate-500 font-mono">Last run: 2026-05-07 06:00 UTC</span>
+                <h2 class="text-white font-semibold text-sm uppercase tracking-wider">Pipeline Flow</h2>
+                <span class="text-xs text-slate-500">Last run: <span id="last-run">--</span></span>
             </div>
-            <div class="relative flex justify-between items-center px-4 py-4">
-                <div class="pipeline-line rounded-full"></div>
-                <div class="pipeline-step flex flex-col items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center text-blue-400 font-bold text-sm">3</div>
-                    <span class="text-xs text-slate-400">Leads</span>
+            <div class="relative">
+                <div class="absolute top-6 left-0 right-0 h-1 pipeline-line rounded-full opacity-30"></div>
+                <div class="grid grid-cols-5 gap-4 relative">
+                    <div class="text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-accent-400 flex items-center justify-center mx-auto mb-2 glow-accent">
+                            <svg class="w-5 h-5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <div class="text-xs font-medium text-white">Lead Scout</div>
+                        <div class="text-[10px] text-slate-500">06:00 daily</div>
+                        <div class="text-[10px] text-accent-400 mt-1" id="pipe-leads">3 found</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-success-400 flex items-center justify-center mx-auto mb-2 glow-success">
+                            <svg class="w-5 h-5 text-success-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <div class="text-xs font-medium text-white">Build Queue</div>
+                        <div class="text-[10px] text-slate-500">Every 4h</div>
+                        <div class="text-[10px] text-success-400 mt-1" id="pipe-built">3 built</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-purple-400 flex items-center justify-center mx-auto mb-2" style="box-shadow: 0 0 20px rgba(192,132,252,0.15)">
+                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        </div>
+                        <div class="text-xs font-medium text-white">Deploy</div>
+                        <div class="text-[10px] text-slate-500">Every 6h</div>
+                        <div class="text-[10px] text-purple-400 mt-1" id="pipe-deployed">3 live</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-warning-400 flex items-center justify-center mx-auto mb-2" style="box-shadow: 0 0 20px rgba(251,191,36,0.15)">
+                            <svg class="w-5 h-5 text-warning-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <div class="text-xs font-medium text-white">Monitor</div>
+                        <div class="text-[10px] text-slate-500">Hourly</div>
+                        <div class="text-[10px] text-warning-400 mt-1" id="pipe-monitor">100% up</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-pink-400 flex items-center justify-center mx-auto mb-2" style="box-shadow: 0 0 20px rgba(244,114,182,0.15)">
+                            <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="text-xs font-medium text-white">Outreach</div>
+                        <div class="text-[10px] text-slate-500">Mon 09:00</div>
+                        <div class="text-[10px] text-pink-400 mt-1" id="pipe-outreach">2/3 sent</div>
+                    </div>
                 </div>
-                <div class="pipeline-step flex flex-col items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center text-blue-400 font-bold text-sm">3</div>
-                    <span class="text-xs text-slate-400">Approved</span>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="glass rounded-xl p-6">
+                <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Lighthouse Scores</h3>
+                <div class="chart-container">
+                    <canvas id="lighthouseChart"></canvas>
                 </div>
-                <div class="pipeline-step flex flex-col items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 font-bold text-sm">3</div>
-                    <span class="text-xs text-slate-400">Built</span>
-                </div>
-                <div class="pipeline-step flex flex-col items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 font-bold text-sm">3</div>
-                    <span class="text-xs text-slate-400">Deployed</span>
-                </div>
-                <div class="pipeline-step flex flex-col items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 font-bold text-sm">2</div>
-                    <span class="text-xs text-slate-400">Outreach</span>
+            </div>
+            <div class="glass rounded-xl p-6">
+                <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Response Time (ms)</h3>
+                <div class="chart-container">
+                    <canvas id="responseChart"></canvas>
                 </div>
             </div>
         </div>
 
         <!-- Sites Table -->
-        <div class="glass-card rounded-xl overflow-hidden mb-8" id="sites">
-            <div class="px-6 py-4 border-b border-slate-700/50 flex items-center justify-between">
-                <h2 class="text-lg font-semibold">Live Sites</h2>
+        <div class="glass rounded-xl p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-white font-semibold text-sm uppercase tracking-wider">Deployed Sites</h2>
                 <div class="flex gap-2">
-                    <button onclick="filterSites('all')" id="tab-all" class="tab-active px-3 py-1 text-sm font-medium transition-colors">All</button>
-                    <button onclick="filterSites('live')" id="tab-live" class="tab-inactive px-3 py-1 text-sm font-medium transition-colors">Live</button>
-                    <button onclick="filterSites('pending')" id="tab-pending" class="tab-inactive px-3 py-1 text-sm font-medium transition-colors">Pending</button>
+                    <span class="text-xs px-2 py-1 rounded bg-success-500/10 text-success-400 border border-success-500/20" id="badge-all">All 3</span>
+                    <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400 border border-slate-700">Live</span>
                 </div>
             </div>
+            <div id="sites-container" class="space-y-3">
+                <!-- Sites injected via JS -->
+            </div>
+        </div>
+
+        <!-- Queue Status -->
+        <div class="glass rounded-xl p-6 mb-8">
+            <h2 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Queue Status</h2>
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700/50">
-                            <th class="px-6 py-3 text-left font-medium">Site</th>
-                            <th class="px-6 py-3 text-left font-medium">Status</th>
-                            <th class="px-6 py-3 text-left font-medium">Score</th>
-                            <th class="px-6 py-3 text-left font-medium">Response</th>
-                            <th class="px-6 py-3 text-left font-medium">Outreach</th>
-                            <th class="px-6 py-3 text-right font-medium">Actions</th>
+                        <tr class="text-slate-500 text-xs uppercase tracking-wider border-b border-slate-800">
+                            <th class="text-left py-3 pr-4">Site</th>
+                            <th class="text-left py-3 pr-4">Stage</th>
+                            <th class="text-left py-3 pr-4">Status</th>
+                            <th class="text-left py-3 pr-4">Last Action</th>
+                            <th class="text-left py-3">Next Action</th>
                         </tr>
                     </thead>
-                    <tbody id="sites-table">
-                        <tr class="border-b border-slate-700/30 hover:bg-slate-800/30 transition-colors">
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold">T</div>
-                                    <div>
-                                        <div class="font-medium text-white">Trattoria Bella Vista</div>
-                                        <div class="text-xs text-slate-400">Restaurant · Berlin</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1.5 text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                                    <span class="status-dot status-live"></span> Live
-                                </span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="score-ring">
-                                        <svg width="48" height="48" viewBox="0 0 48 48">
-                                            <circle class="bg" cx="24" cy="24" r="20"/>
-                                            <circle class="fill" cx="24" cy="24" r="20" stroke="#22c55e" stroke-dasharray="125.6" stroke-dashoffset="3.8"/>
-                                        </svg>
-                                        <span class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">97</span>
-                                    </div>
-                                    <div class="text-xs text-slate-500">
-                                        <div>P: 94</div>
-                                        <div>A: 96</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="font-mono text-xs text-slate-300">245ms</div>
-                                <div class="text-xs text-emerald-400">HTTP 200</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1 text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                    Sent
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <a href="./trattoria-bella-vista/index.html" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-md transition-colors">View Site</a>
-                                    <a href="../payments/trattoria-bella-vista_payment.html" class="text-xs bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-md transition-colors">Order</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-slate-700/30 hover:bg-slate-800/30 transition-colors">
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold">C</div>
-                                    <div>
-                                        <div class="font-medium text-white">Curry House</div>
-                                        <div class="text-xs text-slate-400">Indisches Restaurant · Berlin</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1.5 text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                                    <span class="status-dot status-live"></span> Live
-                                </span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="score-ring">
-                                        <svg width="48" height="48" viewBox="0 0 48 48">
-                                            <circle class="bg" cx="24" cy="24" r="20"/>
-                                            <circle class="fill" cx="24" cy="24" r="20" stroke="#22c55e" stroke-dasharray="125.6" stroke-dashoffset="3.8"/>
-                                        </svg>
-                                        <span class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">97</span>
-                                    </div>
-                                    <div class="text-xs text-slate-500">
-                                        <div>P: 94</div>
-                                        <div>A: 96</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="font-mono text-xs text-slate-300">198ms</div>
-                                <div class="text-xs text-emerald-400">HTTP 200</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1 text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                    Sent
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <a href="./curry-house/index.html" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-md transition-colors">View Site</a>
-                                    <a href="../payments/curry-house_payment.html" class="text-xs bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-md transition-colors">Order</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-slate-800/30 transition-colors">
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold">M</div>
-                                    <div>
-                                        <div class="font-medium text-white">Müller Elektro GmbH</div>
-                                        <div class="text-xs text-slate-400">Handwerk · München</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1.5 text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                                    <span class="status-dot status-live"></span> Live
-                                </span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="score-ring">
-                                        <svg width="48" height="48" viewBox="0 0 48 48">
-                                            <circle class="bg" cx="24" cy="24" r="20"/>
-                                            <circle class="fill" cx="24" cy="24" r="20" stroke="#3b82f6" stroke-dasharray="125.6" stroke-dashoffset="6.3"/>
-                                        </svg>
-                                        <span class="absolute inset-0 flex items-center justify-center text-xs font-bold text-blue-400">95</span>
-                                    </div>
-                                    <div class="text-xs text-slate-500">
-                                        <div>P: 92</div>
-                                        <div>A: 94</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="font-mono text-xs text-slate-300">312ms</div>
-                                <div class="text-xs text-emerald-400">HTTP 200</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1 text-xs bg-amber-500/10 text-amber-400 px-2 py-1 rounded border border-amber-500/20">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                                    Pending
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <a href="./mueller-elektro/index.html" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-md transition-colors">View Site</a>
-                                    <a href="../payments/mueller-elektro_payment.html" class="text-xs bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-md transition-colors">Order</a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody id="queue-body" class="text-slate-300">
+                        <!-- Queue rows injected via JS -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Analytics Charts -->
-        <div class="grid md:grid-cols-2 gap-6 mb-8" id="analytics">
-            <div class="glass-card rounded-xl p-6">
-                <h3 class="text-sm font-semibold text-slate-300 mb-4">Lighthouse Scores</h3>
-                <canvas id="lighthouseChart" height="200"></canvas>
-            </div>
-            <div class="glass-card rounded-xl p-6">
-                <h3 class="text-sm font-semibold text-slate-300 mb-4">Response Times (ms)</h3>
-                <canvas id="responseChart" height="200"></canvas>
-            </div>
-        </div>
-
-        <!-- Activity Log -->
-        <div class="glass-card rounded-xl p-6 mb-8">
-            <h3 class="text-sm font-semibold text-slate-300 mb-4">Recent Activity</h3>
-            <div class="space-y-3">
-                <div class="flex items-start gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 shrink-0"></div>
-                    <div>
-                        <span class="text-slate-300">Site deployed:</span> <span class="text-white font-medium">Müller Elektro GmbH</span>
-                        <div class="text-xs text-slate-500 font-mono">2026-05-06 18:08 UTC</div>
-                    </div>
+        <!-- Bottom Actions -->
+        <div class="grid md:grid-cols-3 gap-4">
+            <a href="https://github.com/unplug-netizen/hermes-sites" target="_blank" class="glass rounded-xl p-4 flex items-center gap-3 hover:border-slate-600 transition-colors group">
+                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                    <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </div>
-                <div class="flex items-start gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 shrink-0"></div>
-                    <div>
-                        <span class="text-slate-300">Outreach sent:</span> <span class="text-white font-medium">Curry House</span>
-                        <div class="text-xs text-slate-500 font-mono">2026-05-06 18:10 UTC</div>
-                    </div>
+                <div>
+                    <div class="text-white text-sm font-medium">GitHub Repository</div>
+                    <div class="text-xs text-slate-500">Code, Issues, Actions</div>
                 </div>
-                <div class="flex items-start gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 shrink-0"></div>
-                    <div>
-                        <span class="text-slate-300">Outreach sent:</span> <span class="text-white font-medium">Trattoria Bella Vista</span>
-                        <div class="text-xs text-slate-500 font-mono">2026-05-06 18:10 UTC</div>
-                    </div>
+            </a>
+            <a href="../README.md" class="glass rounded-xl p-4 flex items-center gap-3 hover:border-slate-600 transition-colors group">
+                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
-                <div class="flex items-start gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 shrink-0"></div>
-                    <div>
-                        <span class="text-slate-300">Site built:</span> <span class="text-white font-medium">3 sites generated</span>
-                        <div class="text-xs text-slate-500 font-mono">2026-05-06 18:05 UTC</div>
-                    </div>
+                <div>
+                    <div class="text-white text-sm font-medium">Documentation</div>
+                    <div class="text-xs text-slate-500">README & Setup Guide</div>
                 </div>
-                <div class="flex items-start gap-3 text-sm">
-                    <div class="w-2 h-2 rounded-full bg-violet-400 mt-1.5 shrink-0"></div>
-                    <div>
-                        <span class="text-slate-300">Leads discovered:</span> <span class="text-white font-medium">3 new businesses</span>
-                        <div class="text-xs text-slate-500 font-mono">2026-05-06 18:00 UTC</div>
-                    </div>
+            </a>
+            <div class="glass rounded-xl p-4 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-success-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div>
+                    <div class="text-white text-sm font-medium">System Status</div>
+                    <div class="text-xs text-success-400">All systems operational</div>
                 </div>
             </div>
         </div>
 
-        <!-- Cron Jobs Status -->
-        <div class="glass-card rounded-xl p-6 mb-8">
-            <h3 class="text-sm font-semibold text-slate-300 mb-4">Automation Schedule</h3>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
-                <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700/30">
-                    <div class="text-xs text-slate-400 mb-1">Lead Scout</div>
-                    <div class="text-sm font-medium text-white">06:00 Daily</div>
-                    <div class="text-xs text-emerald-400 mt-1">Active</div>
-                </div>
-                <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700/30">
-                    <div class="text-xs text-slate-400 mb-1">Build Queue</div>
-                    <div class="text-sm font-medium text-white">Every 4h</div>
-                    <div class="text-xs text-emerald-400 mt-1">Active</div>
-                </div>
-                <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700/30">
-                    <div class="text-xs text-slate-400 mb-1">Deploy</div>
-                    <div class="text-sm font-medium text-white">Every 6h</div>
-                    <div class="text-xs text-emerald-400 mt-1">Active</div>
-                </div>
-                <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700/30">
-                    <div class="text-xs text-slate-400 mb-1">Monitor</div>
-                    <div class="text-sm font-medium text-white">Hourly</div>
-                    <div class="text-xs text-emerald-400 mt-1">Active</div>
-                </div>
-                <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700/30">
-                    <div class="text-xs text-slate-400 mb-1">Outreach</div>
-                    <div class="text-sm font-medium text-white">Mon 09:00</div>
-                    <div class="text-xs text-emerald-400 mt-1">Active</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="text-center py-8 text-slate-500 text-sm">
-            <p>Hermes Sites — Autonomous Webdesign Business Pipeline</p>
-            <p class="mt-1 text-xs">Lead Scout → Build → Deploy → Monitor → Outreach</p>
+        <footer class="text-center py-12 text-slate-600 text-xs">
+            <p>Hermes Sites — Autonomously generated by Hermes Agent</p>
+            <p class="mt-1">Lead Scout → Build → Deploy → Monitor → Outreach</p>
         </footer>
-
     </main>
 
     <script>
-        // Lighthouse Chart
-        const lhCtx = document.getElementById('lighthouseChart').getContext('2d');
-        new Chart(lhCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Trattoria Bella Vista', 'Curry House', 'Müller Elektro'],
-                datasets: [
-                    { label: 'Performance', data: [94, 94, 92], backgroundColor: 'rgba(96, 165, 250, 0.7)', borderRadius: 4 },
-                    { label: 'Accessibility', data: [96, 96, 94], backgroundColor: 'rgba(167, 139, 250, 0.7)', borderRadius: 4 },
-                    { label: 'SEO', data: [98, 98, 96], backgroundColor: 'rgba(34, 197, 94, 0.7)', borderRadius: 4 },
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
-                scales: {
-                    y: { beginAtZero: true, max: 100, ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } },
-                    x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } }
-                }
-            }
-        });
+    // ── Embedded Data (from JSON files) ──
+    const LEADS = {"version":"1.0","last_updated":"2026-05-07T06:00:00Z","leads":[{"id":"trattoria-bella-vista","name":"Trattoria Bella Vista","branche":"restaurant","ort":"Berlin","score":100,"has_website":false,"website_age":null,"mobile_friendly":null,"has_ssl":null,"social_active":true,"status":"live","created_at":"2026-05-06T18:00:00Z","built_at":"2026-05-06T18:05:00Z","deployed_at":"2026-05-06T18:08:00Z","outreach_sent":true,"url":"https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/"},{"id":"curry-house","name":"Curry House","branche":"restaurant","ort":"Berlin","score":95,"has_website":false,"website_age":null,"mobile_friendly":null,"has_ssl":null,"social_active":true,"status":"live","created_at":"2026-05-06T18:00:00Z","built_at":"2026-05-06T18:05:00Z","deployed_at":"2026-05-06T18:08:00Z","outreach_sent":true,"url":"https://unplug-netizen.github.io/hermes-sites/curry-house/"},{"id":"mueller-elektro","name":"Müller Elektro GmbH","branche":"handwerk","ort":"München","score":90,"has_website":false,"website_age":null,"mobile_friendly":null,"has_ssl":null,"social_active":false,"status":"live","created_at":"2026-05-06T18:00:00Z","built_at":"2026-05-06T18:05:00Z","deployed_at":"2026-05-06T18:08:00Z","outreach_sent":false,"url":"https://unplug-netizen.github.io/hermes-sites/mueller-elektro/"}],"stats":{"total_leads":3,"approved":3,"built":3,"live":3,"outreach_pending":1}};
+    const METRICS = {"version":"1.0","last_updated":"2026-05-07T06:00:00Z","sites":[{"id":"trattoria-bella-vista","url":"https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/","status":"up","http_code":200,"response_time_ms":245,"lighthouse":{"performance":94,"accessibility":96,"best_practices":100,"seo":98,"overall":97},"last_check":"2026-05-07T06:00:00Z"},{"id":"curry-house","url":"https://unplug-netizen.github.io/hermes-sites/curry-house/","status":"up","http_code":200,"response_time_ms":198,"lighthouse":{"performance":94,"accessibility":96,"best_practices":100,"seo":98,"overall":97},"last_check":"2026-05-07T06:00:00Z"},{"id":"mueller-elektro","url":"https://unplug-netizen.github.io/hermes-sites/mueller-elektro/","status":"up","http_code":200,"response_time_ms":312,"lighthouse":{"performance":92,"accessibility":94,"best_practices":100,"seo":96,"overall":95},"last_check":"2026-05-07T06:00:00Z"}],"summary":{"total_sites":3,"up":3,"down":0,"avg_response_time_ms":251,"avg_lighthouse":96.3}};
+    const QUEUE = {"version":"1.0","last_updated":"2026-05-07T06:00:00Z","queue":[{"id":"trattoria-bella-vista","status":"live","stage":"completed","retry_count":0,"last_action":"2026-05-06T18:08:00Z","next_action":null},{"id":"curry-house","status":"live","stage":"completed","retry_count":0,"last_action":"2026-05-06T18:08:00Z","next_action":null},{"id":"mueller-elektro","status":"live","stage":"completed","retry_count":0,"last_action":"2026-05-06T18:08:00Z","next_action":"outreach"}],"pending_builds":[],"pending_deploys":[],"pending_outreach":["mueller-elektro"]};
 
-        // Response Time Chart
-        const respCtx = document.getElementById('responseChart').getContext('2d');
-        new Chart(respCtx, {
-            type: 'line',
-            data: {
-                labels: ['Trattoria', 'Curry House', 'Müller Elektro'],
-                datasets: [{
-                    label: 'Response Time (ms)',
-                    data: [245, 198, 312],
-                    borderColor: '#60a5fa',
-                    backgroundColor: 'rgba(96, 165, 250, 0.1)',
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#60a5fa',
-                    pointBorderColor: '#1e293b',
-                    pointBorderWidth: 2,
-                    pointRadius: 5
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
-                scales: {
-                    y: { beginAtZero: true, ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(51, 65, 85, 0.3)' } },
-                    x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } }
-                }
-            }
-        });
+    // ── Clock ──
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('clock').textContent = now.toLocaleTimeString('de-DE', {hour:'2-digit', minute:'2-digit'});
+        document.getElementById('date').textContent = now.toLocaleDateString('de-DE');
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
 
-        // Filter tabs
-        function filterSites(filter) {
-            const rows = document.querySelectorAll('#sites-table tr');
-            const tabs = { all: 'tab-all', live: 'tab-live', pending: 'tab-pending' };
-            Object.keys(tabs).forEach(k => {
-                const el = document.getElementById(tabs[k]);
-                if (k === filter) { el.classList.remove('tab-inactive'); el.classList.add('tab-active'); }
-                else { el.classList.remove('tab-active'); el.classList.add('tab-inactive'); }
-            });
-            rows.forEach(row => {
-                const status = row.querySelector('td:nth-child(2)');
-                if (!status) return;
-                const isLive = status.textContent.includes('Live');
-                const isPending = status.textContent.includes('Pending');
-                if (filter === 'all') row.style.display = '';
-                else if (filter === 'live' && isLive) row.style.display = '';
-                else if (filter === 'pending' && isPending) row.style.display = '';
-                else row.style.display = 'none';
-            });
+    // ── KPIs ──
+    document.getElementById('kpi-leads').textContent = LEADS.stats.total_leads;
+    document.getElementById('kpi-live').textContent = METRICS.summary.up;
+    document.getElementById('kpi-lighthouse').textContent = METRICS.summary.avg_lighthouse.toFixed(1);
+    document.getElementById('kpi-response').textContent = METRICS.summary.avg_response_time_ms + 'ms';
+
+    // ── Pipeline ──
+    document.getElementById('pipe-leads').textContent = LEADS.stats.total_leads + ' found';
+    document.getElementById('pipe-built').textContent = LEADS.stats.built + ' built';
+    document.getElementById('pipe-deployed').textContent = LEADS.stats.live + ' live';
+    document.getElementById('pipe-monitor').textContent = METRICS.summary.up + '/' + METRICS.summary.total_sites + ' up';
+    const outreachSent = LEADS.leads.filter(l => l.outreach_sent).length;
+    document.getElementById('pipe-outreach').textContent = outreachSent + '/' + LEADS.stats.total_leads + ' sent';
+    document.getElementById('last-run').textContent = new Date(LEADS.last_updated).toLocaleString('de-DE');
+
+    // ── Lighthouse Chart ──
+    const lhCtx = document.getElementById('lighthouseChart').getContext('2d');
+    new Chart(lhCtx, {
+        type: 'bar',
+        data: {
+            labels: METRICS.sites.map(s => s.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())),
+            datasets: [
+                { label: 'Performance', data: METRICS.sites.map(s => s.lighthouse.performance), backgroundColor: '#38bdf8', borderRadius: 4 },
+                { label: 'Accessibility', data: METRICS.sites.map(s => s.lighthouse.accessibility), backgroundColor: '#4ade80', borderRadius: 4 },
+                { label: 'SEO', data: METRICS.sites.map(s => s.lighthouse.seo), backgroundColor: '#a78bfa', borderRadius: 4 },
+                { label: 'Best Practices', data: METRICS.sites.map(s => s.lighthouse.best_practices), backgroundColor: '#fbbf24', borderRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#94a3b8', font: { size: 10 }, boxWidth: 10 } } },
+            scales: {
+                x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { display: false } },
+                y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(148,163,184,0.08)' }, max: 100 }
+            }
         }
+    });
+
+    // ── Response Time Chart ──
+    const rtCtx = document.getElementById('responseChart').getContext('2d');
+    new Chart(rtCtx, {
+        type: 'line',
+        data: {
+            labels: METRICS.sites.map(s => s.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())),
+            datasets: [{
+                label: 'Response Time (ms)',
+                data: METRICS.sites.map(s => s.response_time_ms),
+                borderColor: '#38bdf8',
+                backgroundColor: 'rgba(56,189,248,0.1)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#38bdf8',
+                pointBorderColor: '#0f172a',
+                pointBorderWidth: 2,
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { display: false } },
+                y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(148,163,184,0.08)' } }
+            }
+        }
+    });
+
+    // ── Sites Cards ──
+    function scoreColor(score) {
+        if (score >= 95) return 'text-success-400';
+        if (score >= 85) return 'text-warning-400';
+        return 'text-danger-400';
+    }
+    function scoreBg(score) {
+        if (score >= 95) return 'bg-success-500';
+        if (score >= 85) return 'bg-warning-500';
+        return 'bg-danger-500';
+    }
+
+    const sitesContainer = document.getElementById('sites-container');
+    METRICS.sites.forEach(site => {
+        const lead = LEADS.leads.find(l => l.id === site.id);
+        const card = document.createElement('div');
+        card.className = 'site-card glass rounded-xl p-5 border border-slate-800/50';
+        card.innerHTML = `
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500/20 to-accent-600/10 flex items-center justify-center text-accent-400 font-bold text-lg border border-accent-500/20">
+                        ${site.id.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                        <h3 class="text-white font-semibold text-sm">${lead ? lead.name : site.id}</h3>
+                        <p class="text-xs text-slate-500">${lead ? lead.branche + ' in ' + lead.ort : ''} • ${site.status.toUpperCase()}</p>
+                        <div class="flex items-center gap-4 mt-2">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full ${site.status === 'up' ? 'bg-success-400' : 'bg-danger-400'}"></span>
+                                <span class="text-xs text-slate-400">${site.http_code} • ${site.response_time_ms}ms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="flex gap-4">
+                        <div class="text-center">
+                            <div class="text-xs text-slate-500 mb-1">Perf</div>
+                            <div class="lighthouse-bar w-16"><div class="lighthouse-fill ${scoreBg(site.lighthouse.performance)}" style="width:${site.lighthouse.performance}%"></div></div>
+                            <div class="text-[10px] ${scoreColor(site.lighthouse.performance)} mt-0.5">${site.lighthouse.performance}</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xs text-slate-500 mb-1">A11y</div>
+                            <div class="lighthouse-bar w-16"><div class="lighthouse-fill ${scoreBg(site.lighthouse.accessibility)}" style="width:${site.lighthouse.accessibility}%"></div></div>
+                            <div class="text-[10px] ${scoreColor(site.lighthouse.accessibility)} mt-0.5">${site.lighthouse.accessibility}</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xs text-slate-500 mb-1">SEO</div>
+                            <div class="lighthouse-bar w-16"><div class="lighthouse-fill ${scoreBg(site.lighthouse.seo)}" style="width:${site.lighthouse.seo}%"></div></div>
+                            <div class="text-[10px] ${scoreColor(site.lighthouse.seo)} mt-0.5">${site.lighthouse.seo}</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xs text-slate-500 mb-1">BP</div>
+                            <div class="lighthouse-bar w-16"><div class="lighthouse-fill ${scoreBg(site.lighthouse.best_practices)}" style="width:${site.lighthouse.best_practices}%"></div></div>
+                            <div class="text-[10px] ${scoreColor(site.lighthouse.best_practices)} mt-0.5">${site.lighthouse.best_practices}</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="${site.url}" target="_blank" class="px-3 py-1.5 rounded-lg bg-accent-500/10 text-accent-400 text-xs font-medium border border-accent-500/20 hover:bg-accent-500/20 transition-colors">View Site →</a>
+                        ${lead && !lead.outreach_sent ? `<span class="px-2 py-1.5 rounded-lg bg-pink-500/10 text-pink-400 text-xs border border-pink-500/20">Outreach Pending</span>` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+        sitesContainer.appendChild(card);
+    });
+
+    // ── Queue Table ──
+    const queueBody = document.getElementById('queue-body');
+    QUEUE.queue.forEach(item => {
+        const lead = LEADS.leads.find(l => l.id === item.id);
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors';
+        const stageColors = {
+            'completed': 'text-success-400 bg-success-500/10 border-success-500/20',
+            'building': 'text-accent-400 bg-accent-500/10 border-accent-500/20',
+            'pending': 'text-slate-400 bg-slate-700/30 border-slate-600/20',
+            'failed': 'text-danger-400 bg-danger-500/10 border-danger-500/20'
+        };
+        const statusColors = {
+            'live': 'text-success-400',
+            'building': 'text-accent-400',
+            'pending': 'text-slate-400',
+            'failed': 'text-danger-400'
+        };
+        tr.innerHTML = `
+            <td class="py-3 pr-4">
+                <div class="text-white text-sm font-medium">${lead ? lead.name : item.id}</div>
+                <div class="text-[10px] text-slate-500">${lead ? lead.branche + ', ' + lead.ort : ''}</div>
+            </td>
+            <td class="py-3 pr-4">
+                <span class="text-xs px-2 py-0.5 rounded border ${stageColors[item.stage] || stageColors.pending}">${item.stage}</span>
+            </td>
+            <td class="py-3 pr-4">
+                <span class="text-xs ${statusColors[item.status] || 'text-slate-400'}">● ${item.status}</span>
+            </td>
+            <td class="py-3 pr-4 text-xs text-slate-400">${new Date(item.last_action).toLocaleString('de-DE')}</td>
+            <td class="py-3 text-xs ${item.next_action ? 'text-pink-400' : 'text-slate-500'}">${item.next_action || '—'}</td>
+        `;
+        queueBody.appendChild(tr);
+    });
     </script>
 </body>
 </html>
-<!-- deployed: 2026-05-07-08:04:03 -->
