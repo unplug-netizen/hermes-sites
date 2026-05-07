@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-05-07T20:01:32.537305+00:00",
+  "sites": {
+    "trattoria-bella-vista": {
+      "http_status": 200,
+      "http_ok": true,
+      "lighthouse": {
+        "slug": "trattoria-bella-vista",
+        "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+        "timestamp": "2026-05-07T20:01:44.967090+00:00",
+        "scores": {
+          "performance": 96,
+          "accessibility": 91,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 96
+        },
+        "passed": true
+      }
+    },
+    "curry-house": {
+      "http_status": 200,
+      "http_ok": true,
+      "lighthouse": {
+        "slug": "curry-house",
+        "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+        "timestamp": "2026-05-07T20:01:56.677215+00:00",
+        "scores": {
+          "performance": 99,
+          "accessibility": 91,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 96
+        },
+        "passed": true
+      }
+    },
+    "mueller-elektro": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    }
+  },
+  "alerts": [
+    "mueller-elektro: HTTP 404"
+  ],
+  "total_sites": 3,
+  "alerts_count": 1
+}
