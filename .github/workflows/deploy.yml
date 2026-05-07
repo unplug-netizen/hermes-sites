@@ -2,6 +2,7 @@ name: Deploy
 
 on:
   push:
+    branches: [main]
     paths:
       - 'clients/**'
       - 'docs/**'
@@ -10,6 +11,15 @@ on:
       - 'index.html'
       - 'payments/**'
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -22,13 +32,13 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Deploy to GitHub Pages
+      - name: Build site index
         run: python scripts/deploy.py --github-pages
       
-      - name: Commit docs
-        run: |
-          git config user.name "Hermes Bot"
-          git config user.email "bot@hermes-agent.dev"
-          git add docs/ data/queue.json
-          git diff --cached --quiet || git commit -m "deploy: Sites live $(date +%Y-%m-%d-%H:%M)"
-          git push
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/
+      
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
