@@ -69,91 +69,13 @@ def deploy_all():
     return deployed
 
 def update_index():
-    """Update docs index page"""
-    sites = []
-    for site_dir in DOCS_DIR.iterdir():
-        if site_dir.is_dir() and not site_dir.name.startswith("."):
-            sites.append(site_dir.name)
-    
-    index_html = f"""<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HERMES Sites Dashboard</title>
-    <style>
-        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; padding: 2rem; }}
-        .container {{ max-width: 1200px; margin: 0 auto; }}
-        h1 {{ font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }}
-        .subtitle {{ color: #94a3b8; margin-bottom: 2rem; }}
-        .stats {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }}
-        .stat {{ background: #1e293b; padding: 1.5rem; border-radius: 12px; border: 1px solid #334155; }}
-        .stat-value {{ font-size: 2rem; font-weight: 700; color: #667eea; }}
-        .stat-label {{ color: #94a3b8; font-size: 0.875rem; }}
-        .sites {{ display: grid; gap: 1rem; }}
-        .site {{ background: #1e293b; padding: 1.5rem; border-radius: 12px; border: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }}
-        .site-info h3 {{ color: #f8fafc; margin-bottom: 0.25rem; }}
-        .site-info p {{ color: #94a3b8; font-size: 0.875rem; }}
-        .site-link {{ background: #667eea; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.875rem; }}
-        .site-link:hover {{ background: #5a67d8; }}
-        .status {{ display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.5rem; }}
-        .status.live {{ background: #22c55e; }}
-        .footer {{ margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #334155; color: #64748b; font-size: 0.875rem; }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>HERMES Sites</h1>
-        <p class="subtitle">Autonomes Webdesign Business — Dashboard</p>
-        
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value">{len(sites)}</div>
-                <div class="stat-label">Live Sites</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">3</div>
-                <div class="stat-label">Branchen</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">96</div>
-                <div class="stat-label">Avg Lighthouse</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Uptime</div>
-            </div>
-        </div>
-        
-        <div class="sites">
-"""
-    
-    for site in sorted(sites):
-        index_html += f"""
-            <div class="site">
-                <div class="site-info">
-                    <h3><span class="status live"></span>{site.replace('-', ' ').title()}</h3>
-                    <p>https://unplug-netizen.github.io/hermes-sites/{site}/</p>
-                </div>
-                <a href="https://unplug-netizen.github.io/hermes-sites/{site}/" class="site-link" target="_blank">Live Site</a>
-            </div>
-"""
-    
-    index_html += """
-        </div>
-        
-        <div class="footer">
-            <p>HERMES Autonomous Webdesign Business | Powered by Hermes Agent</p>
-            <p>Pipeline: Lead Scout → Build → Deploy → Monitor → Outreach</p>
-        </div>
-    </div>
-</body>
-</html>
-"""
-    
-    (DOCS_DIR / "index.html").write_text(index_html)
-    print("[OK] Updated dashboard index")
+    """Copy root index.html to docs/ for GitHub Pages"""
+    root_index = BASE_DIR / "index.html"
+    if root_index.exists():
+        shutil.copy2(root_index, DOCS_DIR / "index.html")
+        print("[OK] Copied root index.html to docs/")
+    else:
+        print("[WARN] No root index.html found, skipping dashboard update")
 
 def main():
     if "--github-pages" in sys.argv or "--all" in sys.argv:
