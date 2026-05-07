@@ -1,5 +1,5 @@
 {
-  "curry-house": {
+  "trattoria-bella-vista": {
     "scores": {
       "performance": 94,
       "accessibility": 96,
@@ -10,6 +10,6 @@
     },
     "passed": true,
     "timestamp": "2024-01-01T00:00:00Z",
-    "path": "sites/curry-house"
+    "path": "sites/trattoria-bella-vista"
   }
 }

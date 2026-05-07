@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-05-07-08",
+  "checked_sites": 3,
+  "live_sites": 2,
+  "alerts": 1,
+  "sites": {
+    "trattoria-bella-vista": {
+      "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+      "http_status": 200,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "status": "OK",
+      "alert": false
+    },
+    "curry-house": {
+      "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+      "http_status": 200,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "status": "OK",
+      "alert": false
+    },
+    "mueller-elektro": {
+      "url": "https://unplug-netizen.github.io/hermes-sites/mueller-elektro/",
+      "http_status": 404,
+      "lighthouse": {
+        "performance": 0,
+        "accessibility": 0,
+        "best_practices": 0,
+        "seo": 0,
+        "pwa": 0,
+        "overall": 0
+      },
+      "status": "ALERT",
+      "alert": true,
+      "reason": "HTTP 404 - Site not deployed"
+    }
+  }
+}

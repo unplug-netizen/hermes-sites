@@ -1,0 +1,16 @@
+{
+  "mueller-elektro": {
+    "scores": {
+      "performance": 0,
+      "accessibility": 0,
+      "best_practices": 0,
+      "seo": 0,
+      "pwa": 0,
+      "overall": 0
+    },
+    "passed": false,
+    "timestamp": "2024-01-01T00:00:00Z",
+    "path": "sites/mueller-elektro",
+    "error": "Site not deployed (HTTP 404)"
+  }
+}
