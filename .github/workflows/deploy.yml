@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'clients/**'
+      - 'docs/**'
+      - 'data/**'
+      - 'scripts/**'
   workflow_dispatch:
 
 jobs:
