@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Sites — Autonomous Webdesign Business Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        brand: {
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; }
+        .glass { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(148, 163, 184, 0.08); }
+        .card-hover { transition: all 0.2s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); border-color: rgba(59, 130, 246, 0.2); }
+        .status-dot { animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .metric-change.up { color: #34d399; }
+        .metric-change.down { color: #f87171; }
+        .pipeline-bar { height: 4px; border-radius: 2px; background: #334155; position: relative; overflow: hidden; }
+        .pipeline-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #3b82f6, #60a5fa); transition: width 0.6s ease; }
+        .sidebar-link { transition: all 0.15s; }
+        .sidebar-link:hover, .sidebar-link.active { background: rgba(59, 130, 246, 0.1); color: #60a5fa; border-right: 2px solid #3b82f6; }
+        .site-card { position: relative; overflow: hidden; }
+        .site-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
+        .lighthouse-ring { position: relative; width: 48px; height: 48px; }
+        .lighthouse-ring svg { transform: rotate(-90deg); }
+        .lighthouse-ring circle { fill: none; stroke-width: 4; }
+        .lighthouse-ring .bg { stroke: #334155; }
+        .lighthouse-ring .progress { stroke: #34d399; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col flex-shrink-0">
+            <div class="p-6 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white font-bold text-lg">H</div>
+                    <div>
+                        <div class="font-bold text-white text-sm">Hermes Sites</div>
+                        <div class="text-xs text-slate-500">Autonomous Business</div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto scrollbar-hide">
+                <a href="#overview" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    Dashboard
+                </a>
+                <a href="#sites" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                    Websites
+                    <span class="ml-auto bg-blue-500/20 text-blue-400 text-xs px-2 py-0.5 rounded-full font-mono">3</span>
+                </a>
+                <a href="#pipeline" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    Pipeline
+                </a>
+                <a href="#leads" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    Leads
+                    <span class="ml-auto bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded-full font-mono">3</span>
+                </a>
+                <a href="#monitoring" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    Monitoring
+                </a>
+                <a href="#cron" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Cron Jobs
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-slate-800">
+                <div class="glass rounded-xl p-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-2 h-2 rounded-full bg-emerald-400 status-dot"></div>
+                        <span class="text-xs font-medium text-emerald-400">System Operational</span>
+                    </div>
+                    <div class="text-xs text-slate-500">Alle 3 Sites online</div>
+                    <div class="text-xs text-slate-500 mt-1">Avg. Response: 251ms</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto scrollbar-hide">
+            <!-- Header -->
+            <header class="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Dashboard</h1>
+                        <p class="text-sm text-slate-500 mt-0.5">Autonomous Webdesign Business — <span id="last-updated" class="font-mono text-slate-400">2026-05-07 06:00 UTC</span></p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <a href="https://github.com/unplug-netizen/hermes-sites" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-sm text-slate-300 transition-colors border border-slate-700">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            Repository
+                        </a>
+                        <button onclick="refreshData()" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-sm text-white transition-colors font-medium">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-8 space-y-8">
+                <!-- KPI Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass rounded-xl p-5 card-hover">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="text-sm text-slate-400 font-medium">Live Websites</div>
+                            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-bold text-white">3</div>
+                        <div class="flex items-center gap-1 mt-2 text-xs">
+                            <span class="text-emerald-400 font-medium">+3</span>
+                            <span class="text-slate-500">seit Launch</span>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-5 card-hover">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="text-sm text-slate-400 font-medium">Avg. Lighthouse</div>
+                            <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-bold text-white">96.3</div>
+                        <div class="flex items-center gap-1 mt-2 text-xs">
+                            <span class="text-emerald-400 font-medium">+2.1</span>
+                            <span class="text-slate-500">vs letzte Woche</span>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-5 card-hover">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="text-sm text-slate-400 font-medium">Leads gefunden</div>
+                            <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-bold text-white">3</div>
+                        <div class="flex items-center gap-1 mt-2 text-xs">
+                            <span class="text-slate-500">1 Outreach pending</span>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-5 card-hover">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="text-sm text-slate-400 font-medium">Uptime</div>
+                            <div class="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-bold text-white">100%</div>
+                        <div class="flex items-center gap-1 mt-2 text-xs">
+                            <span class="text-emerald-400 font-medium">3/3</span>
+                            <span class="text-slate-500">Sites online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Lighthouse Chart -->
+                    <div class="glass rounded-xl p-6 lg:col-span-2">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h3 class="font-semibold text-white">Lighthouse Scores</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">Performance · Accessibility · Best Practices · SEO</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <span class="text-xs px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 font-mono">97 avg</span>
+                            </div>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="lighthouseChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Pipeline Status -->
+                    <div class="glass rounded-xl p-6">
+                        <h3 class="font-semibold text-white mb-6">Pipeline Status</h3>
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-slate-400">Lead Scout</span>
+                                    <span class="text-emerald-400 font-medium">3/3</span>
+                                </div>
+                                <div class="pipeline-bar"><div class="pipeline-bar-fill" style="width: 100%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-slate-400">Site Build</span>
+                                    <span class="text-emerald-400 font-medium">3/3</span>
+                                </div>
+                                <div class="pipeline-bar"><div class="pipeline-bar-fill" style="width: 100%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-slate-400">Deploy</span>
+                                    <span class="text-emerald-400 font-medium">3/3</span>
+                                </div>
+                                <div class="pipeline-bar"><div class="pipeline-bar-fill" style="width: 100%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-slate-400">Outreach</span>
+                                    <span class="text-amber-400 font-medium">2/3</span>
+                                </div>
+                                <div class="pipeline-bar"><div class="pipeline-bar-fill" style="width: 66%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-slate-400">Monitor</span>
+                                    <span class="text-emerald-400 font-medium">3/3</span>
+                                </div>
+                                <div class="pipeline-bar"><div class="pipeline-bar-fill" style="width: 100%"></div></div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-700/50">
+                            <div class="flex items-center gap-2 text-xs text-slate-500">
+                                <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                                Nächster: hermes-monitor um 19:00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Sites -->
+                <div id="sites">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-white">Live Websites</h2>
+                        <span class="text-xs text-slate-500 font-mono">3 Sites deployed</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Site 1 -->
+                        <div class="site-card glass rounded-xl p-5 card-hover">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white text-lg">🍝</div>
+                                    <div>
+                                        <h3 class="font-semibold text-white text-sm">Trattoria Bella Vista</h3>
+                                        <p class="text-xs text-slate-500">Restaurant · Berlin</p>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium">LIVE</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 mb-4">
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="7.5"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">94</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">Perf</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="5.0"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">96</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">A11y</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="0"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">100</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">BP</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="2.5"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">98</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">SEO</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>Response: 245ms</span>
+                                <span>Updated: heute</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <a href="./trattoria-bella-vista/index.html" class="flex-1 text-center py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors">Website</a>
+                                <a href="./payments/trattoria-bella-vista_payment.html" class="px-3 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-sm transition-colors" title="Bestellen">💳</a>
+                            </div>
+                        </div>
+
+                        <!-- Site 2 -->
+                        <div class="site-card glass rounded-xl p-5 card-hover">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-lg">🍛</div>
+                                    <div>
+                                        <h3 class="font-semibold text-white text-sm">Curry House</h3>
+                                        <p class="text-xs text-slate-500">Indisch · Berlin</p>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium">LIVE</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 mb-4">
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="7.5"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">94</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">Perf</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="5.0"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">96</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">A11y</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="0"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">100</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">BP</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="2.5"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">98</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">SEO</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>Response: 198ms</span>
+                                <span>Updated: heute</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <a href="./curry-house/index.html" class="flex-1 text-center py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors">Website</a>
+                                <a href="./payments/curry-house_payment.html" class="px-3 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-sm transition-colors" title="Bestellen">💳</a>
+                            </div>
+                        </div>
+
+                        <!-- Site 3 -->
+                        <div class="site-card glass rounded-xl p-5 card-hover">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-lg">⚡</div>
+                                    <div>
+                                        <h3 class="font-semibold text-white text-sm">Müller Elektro</h3>
+                                        <p class="text-xs text-slate-500">Handwerk · München</p>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium">LIVE</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 mb-4">
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="10.0" style="stroke: #fbbf24;"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-amber-400">92</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">Perf</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="7.5" style="stroke: #fbbf24;"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-amber-400">94</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">A11y</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="0"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-400">100</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">BP</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="lighthouse-ring mx-auto">
+                                        <svg width="48" height="48" viewBox="0 0 48 48">
+                                            <circle class="bg" cx="24" cy="24" r="20"/>
+                                            <circle class="progress" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="5.0" style="stroke: #fbbf24;"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-amber-400">96</div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 mt-1">SEO</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs text-slate-500 mb-4">
+                                <span>Response: 312ms</span>
+                                <span class="text-amber-400">Outreach pending</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <a href="./mueller-elektro/index.html" class="flex-1 text-center py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors">Website</a>
+                                <a href="./payments/mueller-elektro_payment.html" class="px-3 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-sm transition-colors" title="Bestellen">💳</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cron Jobs & Activity -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="cron">
+                    <!-- Cron Jobs Table -->
+                    <div class="glass rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-white">Cron Jobs</h3>
+                            <span class="text-xs text-slate-500 font-mono">5 Jobs scheduled</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="text-left text-slate-500 border-b border-slate-700/50">
+                                        <th class="pb-3 font-medium">Job</th>
+                                        <th class="pb-3 font-medium">Schedule</th>
+                                        <th class="pb-3 font-medium">Nächster Lauf</th>
+                                        <th class="pb-3 font-medium text-right">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-300">
+                                    <tr class="border-b border-slate-800/50">
+                                        <td class="py-3 font-medium">hermes-lead-scout</td>
+                                        <td class="py-3 font-mono text-xs text-slate-500">0 6 * * *</td>
+                                        <td class="py-3 text-xs">Morgen 06:00</td>
+                                        <td class="py-3 text-right"><span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">✅</span></td>
+                                    </tr>
+                                    <tr class="border-b border-slate-800/50">
+                                        <td class="py-3 font-medium">hermes-build-queue</td>
+                                        <td class="py-3 font-mono text-xs text-slate-500">0 */4 * * *</td>
+                                        <td class="py-3 text-xs">Heute 20:00</td>
+                                        <td class="py-3 text-right"><span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">✅</span></td>
+                                    </tr>
+                                    <tr class="border-b border-slate-800/50">
+                                        <td class="py-3 font-medium">hermes-deploy</td>
+                                        <td class="py-3 font-mono text-xs text-slate-500">0 */6 * * *</td>
+                                        <td class="py-3 text-xs">Heute 18:00</td>
+                                        <td class="py-3 text-right"><span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">✅</span></td>
+                                    </tr>
+                                    <tr class="border-b border-slate-800/50">
+                                        <td class="py-3 font-medium">hermes-monitor</td>
+                                        <td class="py-3 font-mono text-xs text-slate-500">0 * * * *</td>
+                                        <td class="py-3 text-xs">Heute 19:00</td>
+                                        <td class="py-3 text-right"><span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">✅</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 font-medium">hermes-outreach</td>
+                                        <td class="py-3 font-mono text-xs text-slate-500">0 9 * * 1</td>
+                                        <td class="py-3 text-xs">Mo 09:00</td>
+                                        <td class="py-3 text-right"><span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">✅</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Response Time Chart -->
+                    <div class="glass rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-white">Response Times</h3>
+                            <span class="text-xs text-slate-500 font-mono">Avg: 251ms</span>
+                        </div>
+                        <div class="h-48">
+                            <canvas id="responseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <footer class="text-center py-6 text-slate-600 text-sm border-t border-slate-800">
+                    <p>HERMES Autonomous Webdesign Business — Powered by Hermes Agent + Kimi 2.6</p>
+                    <p class="text-xs mt-1 text-slate-700">Pipeline: Lead Scout → Site Builder → Deploy → Monitor → Outreach</p>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Lighthouse Chart
+        const lighthouseCtx = document.getElementById('lighthouseChart').getContext('2d');
+        new Chart(lighthouseCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Trattoria Bella Vista', 'Curry House', 'Müller Elektro'],
+                datasets: [
+                    {
+                        label: 'Performance',
+                        data: [94, 94, 92],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: '#3b82f6',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                    },
+                    {
+                        label: 'Accessibility',
+                        data: [96, 96, 94],
+                        backgroundColor: 'rgba(139, 92, 246, 0.7)',
+                        borderColor: '#8b5cf6',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                    },
+                    {
+                        label: 'SEO',
+                        data: [98, 98, 96],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                        borderColor: '#10b981',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#94a3b8', font: { size: 11 } }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#94a3b8', font: { size: 11 } },
+                        grid: { color: 'rgba(148, 163, 184, 0.08)' }
+                    },
+                    y: {
+                        ticks: { color: '#94a3b8', font: { size: 11 } },
+                        grid: { color: 'rgba(148, 163, 184, 0.08)' },
+                        min: 80,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Response Time Chart
+        const responseCtx = document.getElementById('responseChart').getContext('2d');
+        new Chart(responseCtx, {
+            type: 'line',
+            data: {
+                labels: ['Trattoria', 'Curry House', 'Müller Elektro'],
+                datasets: [{
+                    label: 'Response Time (ms)',
+                    data: [245, 198, 312],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#3b82f6',
+                    pointBorderColor: '#1e293b',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#94a3b8', font: { size: 11 } },
+                        grid: { display: false }
+                    },
+                    y: {
+                        ticks: { color: '#94a3b8', font: { size: 11 } },
+                        grid: { color: 'rgba(148, 163, 184, 0.08)' },
+                        min: 0
+                    }
+                }
+            }
+        });
+
+        // Refresh function
+        function refreshData() {
+            document.getElementById('last-updated').textContent = new Date().toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
+            // In a real app, this would fetch fresh data
+        }
+
+        // Smooth scroll for sidebar links
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                if (target === '#overview') {
+                    document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const el = document.querySelector(target);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
