@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-05-07T06:09:22.470923",
+  "lead": {
+    "name": "Trattoria Bella Vista",
+    "category": "restaurant",
+    "address": "Hauptstraße 42, Berlin",
+    "phone": "030-12345678",
+    "website": null,
+    "rating": 4.5,
+    "review_count": 127,
+    "place_id": "demo_1",
+    "source": "demo",
+    "city": "Berlin",
+    "score": 100,
+    "has_website": false
+  },
+  "deploy_url": "file:///root/hermes-sites/preview/trattoria-bella-vista/index.html",
+  "status": "success"
+}

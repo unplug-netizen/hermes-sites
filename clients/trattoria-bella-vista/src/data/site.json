@@ -2,7 +2,7 @@
   "business": {
     "name": "Trattoria Bella Vista",
     "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Berli",
-    "address": "Hauptstraße 42, 10115 Berlin",
+    "address": "Hauptstraße 42, Berlin",
     "phone": "030-12345678",
     "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
     "category": "restaurant",
@@ -11,7 +11,7 @@
   "content": {
     "seo": {
       "title": "Trattoria Bella Vista - Professionelle Services in Berlin",
-      "description": "Trattoria Bella Vista bietet erstklassige Leistungen in Berlin. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Hauptstraße 42, 10115 Berlin.",
+      "description": "Trattoria Bella Vista bietet erstklassige Leistungen in Berlin. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Hauptstraße 42, Berlin.",
       "keywords": [
         "restaurant",
         "essen",

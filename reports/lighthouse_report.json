@@ -10,6 +10,6 @@
     },
     "passed": true,
     "timestamp": "2024-01-01T00:00:00Z",
-    "path": "clients/curry-house/dist"
+    "path": "clients/curry-house/dist/index.html"
   }
 }
