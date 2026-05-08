@@ -20,17 +20,15 @@
     },
     {
       "id": "mueller-elektro",
-      "status": "built",
+      "status": "live",
       "stage": "completed",
       "retry_count": 0,
       "last_action": "2026-05-08T00:04:00Z",
-      "next_action": "deploy"
+      "next_action": null
     }
   ],
   "pending_builds": [],
-  "pending_deploys": [
-    "mueller-elektro"
-  ],
+  "pending_deploys": [],
   "pending_outreach": [
     "mueller-elektro"
   ]
