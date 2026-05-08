@@ -54,10 +54,10 @@ def deploy_all():
     deployed = []
     
     for item in queue_data.get("queue", []):
-        if item["status"] == "built":
+        if item["status"] in ("built", "deploying"):
             site_id = item["id"]
             if deploy_site(site_id):
-                item["status"] = "deploying"
+                item["status"] = "live"
                 item["last_action"] = subprocess.check_output(["date", "-u", "+%Y-%m-%dT%H:%M:%SZ"]).decode().strip()
                 deployed.append(site_id)
     
