@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-05-07T06:00:00Z",
+  "last_updated": "2026-05-08T06:00:00Z",
   "leads": [
     {
       "id": "trattoria-bella-vista",
@@ -55,13 +55,31 @@
       "deployed_at": "2026-05-06T18:08:00Z",
       "outreach_sent": false,
       "url": "https://unplug-netizen.github.io/hermes-sites/mueller-elektro/"
+    },
+    {
+      "id": "pizza-roma",
+      "name": "Pizza Roma",
+      "branche": "restaurant",
+      "ort": "Berlin",
+      "score": 95,
+      "has_website": false,
+      "website_age": null,
+      "mobile_friendly": null,
+      "has_ssl": null,
+      "social_active": true,
+      "status": "approved",
+      "created_at": "2026-05-08T06:00:00Z",
+      "built_at": null,
+      "deployed_at": null,
+      "outreach_sent": false,
+      "url": null
     }
   ],
   "stats": {
-    "total_leads": 3,
-    "approved": 3,
+    "total_leads": 4,
+    "approved": 4,
     "built": 3,
     "live": 3,
-    "outreach_pending": 1
+    "outreach_pending": 2
   }
 }
