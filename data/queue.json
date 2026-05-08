@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-05-07T08:13:34Z",
+  "last_updated": "2026-05-08T00:04:00Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -20,15 +20,17 @@
     },
     {
       "id": "mueller-elektro",
-      "status": "live",
+      "status": "built",
       "stage": "completed",
       "retry_count": 0,
-      "last_action": "2026-05-06T18:08:00Z",
-      "next_action": "outreach"
+      "last_action": "2026-05-08T00:04:00Z",
+      "next_action": "deploy"
     }
   ],
   "pending_builds": [],
-  "pending_deploys": [],
+  "pending_deploys": [
+    "mueller-elektro"
+  ],
   "pending_outreach": [
     "mueller-elektro"
   ]
