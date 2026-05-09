@@ -67,7 +67,7 @@
       "mobile_friendly": null,
       "has_ssl": null,
       "social_active": true,
-      "status": "built",
+      "status": "live",
       "created_at": "2026-05-08T06:00:00Z",
       "built_at": "2026-05-08T12:01:00Z",
       "deployed_at": null,
