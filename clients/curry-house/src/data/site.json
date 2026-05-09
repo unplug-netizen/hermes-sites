@@ -2,8 +2,8 @@
   "business": {
     "name": "Curry House",
     "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Berli",
-    "address": "Oranienburger Straße 3, Berlin",
-    "phone": "030-11122233",
+    "address": "Berlin",
+    "phone": "030-12345678",
     "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
     "category": "restaurant",
     "city": "Berlin"
@@ -11,7 +11,7 @@
   "content": {
     "seo": {
       "title": "Curry House - Professionelle Services in Berlin",
-      "description": "Curry House bietet erstklassige Leistungen in Berlin. Kontaktieren Sie uns unter 030-11122233 oder besuchen Sie uns in der Oranienburger Straße 3, Berlin.",
+      "description": "Curry House bietet erstklassige Leistungen in Berlin. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Berlin.",
       "keywords": [
         "restaurant",
         "essen",
