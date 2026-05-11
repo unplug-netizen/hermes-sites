@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-05-10T16:01:20Z",
+  "last_updated": "2026-05-11T06:00:00Z",
   "leads": [
     {
       "id": "trattoria-bella-vista",
@@ -73,13 +73,31 @@
       "deployed_at": null,
       "outreach_sent": false,
       "url": "https://unplug-netizen.github.io/hermes-sites/pizza-roma/"
+    },
+    {
+      "id": "sushi-palace",
+      "name": "Sushi Palace",
+      "branche": "restaurant",
+      "ort": "Berlin",
+      "score": 85,
+      "has_website": true,
+      "website_age": null,
+      "mobile_friendly": null,
+      "has_ssl": null,
+      "social_active": true,
+      "status": "new",
+      "created_at": "2026-05-11T06:00:00Z",
+      "built_at": null,
+      "deployed_at": null,
+      "outreach_sent": false,
+      "url": null
     }
   ],
   "stats": {
-    "total_leads": 4,
+    "total_leads": 5,
     "approved": 4,
     "built": 3,
     "live": 3,
-    "outreach_pending": 2
+    "outreach_pending": 3
   }
 }
