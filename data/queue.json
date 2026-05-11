@@ -36,8 +36,11 @@
     }
   ],
   "pending_builds": [],
-  "pending_deploys": [],
+  "pending_deploys": [
+    "sushi-palace"
+  ],
   "pending_outreach": [
-    "mueller-elektro"
+    "mueller-elektro",
+    "sushi-palace"
   ]
 }
