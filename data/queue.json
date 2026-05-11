@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-05-11T06:08:49Z",
+  "last_updated": "2026-05-11T12:03:20Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -32,6 +32,14 @@
       "stage": "completed",
       "retry_count": 0,
       "last_action": "2026-05-08T18:01:03Z",
+      "next_action": null
+    },
+    {
+      "id": "sushi-palace",
+      "status": "live",
+      "stage": "build_complete",
+      "retry_count": 0,
+      "last_action": "2026-05-11T12:03:20Z",
       "next_action": null
     }
   ],
