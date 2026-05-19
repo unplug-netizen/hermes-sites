@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-05-17T00:03:41Z",
+  "last_updated": "2026-05-19T12:02:29Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -44,9 +44,7 @@
     }
   ],
   "pending_builds": [],
-  "pending_deploys": [
-    "sushi-palace"
-  ],
+  "pending_deploys": [],
   "pending_outreach": [
     "mueller-elektro",
     "sushi-palace"
