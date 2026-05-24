@@ -1,62 +1,57 @@
 #!/usr/bin/env python3
-"""Merge new qualified leads into leads.json with deduplication."""
+"""Merge new qualified leads into data/leads.json, avoiding duplicates."""
 import json
-import sys
-from pathlib import Path
 from datetime import datetime, timezone
+from pathlib import Path
 
 def main():
     # Load existing leads
-    with open('data/leads.json', 'r') as f:
-        existing = json.load(f)
+    with open('data/leads.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
 
     # Load new qualified leads
-    with open('data/leads_out/qualified_leads.json', 'r') as f:
+    with open('leads/qualified_leads.json', 'r', encoding='utf-8') as f:
         new_leads = json.load(f)
 
-    existing_names = { (l['name'], l['ort']) for l in existing['leads'] }
-    new_added = []
-
-    for nl in new_leads:
-        key = (nl['name'], nl['city'])
-        if key not in existing_names:
-            lead_id = nl['name'].lower().replace(' ', '-').replace('ü', 'u').replace('ö', 'o').replace('ä', 'a').replace('ß', 'ss')
-            entry = {
-                'id': lead_id,
-                'name': nl['name'],
-                'branche': nl['category'],
-                'ort': nl['city'],
-                'score': nl['score'],
-                'has_website': nl['has_website'],
+    added = 0
+    for lead in new_leads:
+        name = lead['name']
+        ort = lead['city']
+        # Check for duplicates by name+ort
+        is_duplicate = any(
+            l['name'].lower().strip() == name.lower().strip() and l['ort'].lower().strip() == ort.lower().strip()
+            for l in data['leads']
+        )
+        if not is_duplicate:
+            new_id = name.lower().replace(' ', '-').replace('gmbh', '').strip('-')
+            data['leads'].append({
+                'id': new_id,
+                'name': name,
+                'branche': lead['category'],
+                'ort': ort,
+                'score': lead['score'],
+                'has_website': lead['has_website'],
                 'website_age': None,
                 'mobile_friendly': None,
                 'has_ssl': None,
-                'social_active': True if nl['review_count'] and nl['review_count'] > 50 else False,
+                'social_active': True if lead['review_count'] and lead['review_count'] > 50 else False,
                 'status': 'new',
                 'created_at': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
                 'built_at': None,
                 'deployed_at': None,
                 'outreach_sent': False,
                 'url': None
-            }
-            existing['leads'].append(entry)
-            new_added.append(entry)
-            print(f"Neuer Lead: {nl['name']} | Score: {nl['score']} | {nl['city']}")
-        else:
-            print(f"Duplikat übersprungen: {nl['name']} in {nl['city']}")
+            })
+            added += 1
 
-    existing['last_updated'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
-    existing['stats']['total_leads'] = len(existing['leads'])
-    existing['stats']['approved'] = len([l for l in existing['leads'] if l['score'] >= 70])
+    data['stats']['total_leads'] = len(data['leads'])
+    data['stats']['approved'] = len([l for l in data['leads'] if l['score'] >= 70])
+    data['last_updated'] = datetime.now(timezone.utc).isoformat()
 
-    with open('data/leads.json', 'w') as f:
-        json.dump(existing, f, indent=2, ensure_ascii=False)
+    with open('data/leads.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
-    print(f"\nGesamt: {len(new_added)} neue Leads hinzugefügt")
-    # Write list of new lead IDs for downstream processing
-    with open('data/new_lead_ids.txt', 'w') as f:
-        for l in new_added:
-            f.write(l['id'] + '\n')
+    print(f'Added {added} new leads')
 
 if __name__ == '__main__':
     main()
