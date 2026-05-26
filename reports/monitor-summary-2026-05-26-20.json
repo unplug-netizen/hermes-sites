@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-26T20:01:52.453518+00:00",
+  "timestamp": "2026-05-26T20:02:19.404491+00:00",
   "sites": {
     "trattoria-bella-vista": {
       "http_status": 200,
@@ -7,9 +7,9 @@
       "lighthouse": {
         "slug": "trattoria-bella-vista",
         "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
-        "timestamp": "2026-05-26T20:02:05.037012+00:00",
+        "timestamp": "2026-05-26T20:02:31.250918+00:00",
         "scores": {
-          "performance": 95,
+          "performance": 97,
           "accessibility": 91,
           "best-practices": 96,
           "seo": 100,
@@ -24,7 +24,7 @@
       "lighthouse": {
         "slug": "curry-house",
         "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
-        "timestamp": "2026-05-26T20:02:16.763728+00:00",
+        "timestamp": "2026-05-26T20:02:42.860765+00:00",
         "scores": {
           "performance": 99,
           "accessibility": 91,
