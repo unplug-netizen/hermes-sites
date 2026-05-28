@@ -58,6 +58,7 @@ def deploy_all():
             site_id = item["id"]
             if deploy_site(site_id):
                 item["status"] = "live"
+                item["stage"] = "completed"
                 item["last_action"] = subprocess.check_output(["date", "-u", "+%Y-%m-%dT%H:%M:%SZ"]).decode().strip()
                 deployed.append(site_id)
     
