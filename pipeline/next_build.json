@@ -1,14 +1,14 @@
 {
   "name": "Trattoria Bella Vista",
   "category": "restaurant",
-  "address": "Hauptstraße 42, Berlin",
+  "address": "Hauptstraße 42, Hamburg",
   "phone": "030-12345678",
   "website": null,
   "rating": 4.5,
   "review_count": 127,
   "place_id": "demo_1",
   "source": "demo",
-  "city": "Berlin",
+  "city": "Hamburg",
   "score": 100,
   "has_website": false
 }
