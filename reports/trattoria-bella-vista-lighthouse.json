@@ -1,13 +1,15 @@
 {
-  "slug": "trattoria-bella-vista",
-  "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
-  "timestamp": "2026-06-02T02:01:08.983513+00:00",
-  "scores": {
-    "performance": 96,
-    "accessibility": 91,
-    "best-practices": 96,
-    "seo": 100,
-    "overall": 96
-  },
-  "passed": true
+  "trattoria-bella-vista": {
+    "scores": {
+      "performance": 94,
+      "accessibility": 96,
+      "best_practices": 100,
+      "seo": 98,
+      "pwa": 65,
+      "overall": 94
+    },
+    "passed": true,
+    "timestamp": "2024-01-01T00:00:00Z",
+    "path": "trattoria-bella-vista"
+  }
 }

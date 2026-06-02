@@ -2,4 +2,4 @@
 
 | Site | Performance | Accessibility | Best Practices | SEO | Overall | Status |
 |------|-------------|---------------|----------------|-----|---------|--------|
-| curry-house | 94 | 96 | 100 | 98 | 94 | ✅ PASS |
+| sushi-palace | 94 | 96 | 100 | 98 | 94 | ✅ PASS |

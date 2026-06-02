@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-06-02T03:02:01+00:00",
+  "checked_sites": 5,
+  "results": [
+    {
+      "slug": "trattoria-bella-vista",
+      "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+      "http_status": 200,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "status": "OK"
+    },
+    {
+      "slug": "curry-house",
+      "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+      "http_status": 200,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "status": "OK"
+    },
+    {
+      "slug": "mueller-elektro",
+      "url": "https://unplug-netizen.github.io/hermes-sites/mueller-elektro/",
+      "http_status": 404,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "status": "ALERT"
+    },
+    {
+      "slug": "pizza-roma",
+      "url": "https://unplug-netizen.github.io/hermes-sites/pizza-roma/",
+      "http_status": 404,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "status": "ALERT"
+    },
+    {
+      "slug": "sushi-palace",
+      "url": "https://unplug-netizen.github.io/hermes-sites/sushi-palace/",
+      "http_status": 404,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "status": "ALERT"
+    }
+  ],
+  "summary": {
+    "ok": 2,
+    "alert": 3,
+    "alerts": [
+      "mueller-elektro: HTTP 404",
+      "pizza-roma: HTTP 404",
+      "sushi-palace: HTTP 404"
+    ]
+  }
+}
