@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Trattoria Bella Vista",
+    "category": "restaurant",
+    "address": "Hauptstraße 42, Hamburg",
+    "phone": "030-12345678",
+    "website": null,
+    "rating": 4.5,
+    "review_count": 127,
+    "place_id": "demo_1",
+    "source": "demo",
+    "city": "Hamburg",
+    "score": 100,
+    "has_website": false
+  },
+  {
+    "name": "Curry House",
+    "category": "restaurant",
+    "address": "Oranienburger Straße 3, Hamburg",
+    "phone": "030-11122233",
+    "website": null,
+    "rating": 4.8,
+    "review_count": 56,
+    "place_id": "demo_4",
+    "source": "demo",
+    "city": "Hamburg",
+    "score": 100,
+    "has_website": false
+  },
+  {
+    "name": "Pizza Roma",
+    "category": "restaurant",
+    "address": "Karl-Marx-Straße 15, Hamburg",
+    "phone": "030-87654321",
+    "website": null,
+    "rating": 4.2,
+    "review_count": 89,
+    "place_id": "demo_2",
+    "source": "demo",
+    "city": "Hamburg",
+    "score": 95,
+    "has_website": false
+  }
+]
