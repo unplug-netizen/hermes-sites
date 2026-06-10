@@ -1,57 +1,64 @@
 #!/usr/bin/env python3
-"""Merge new qualified leads into data/leads.json, avoiding duplicates."""
+"""
+Merge neue Leads aus leads/qualified_leads.json in data/leads.json
+- Prüft Duplikate (Name + Ort)
+- Filtert Score >= 70
+- Aktualisiert Stats
+"""
 import json
-from datetime import datetime, timezone
-from pathlib import Path
+import datetime
 
-def main():
-    # Load existing leads
-    with open('data/leads.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
+# Load existing leads
+with open('data/leads.json', 'r') as f:
+    data = json.load(f)
 
-    # Load new qualified leads
-    with open('leads/qualified_leads.json', 'r', encoding='utf-8') as f:
-        new_leads = json.load(f)
+existing = {(l['name'], l['ort']) for l in data['leads']}
 
-    added = 0
-    for lead in new_leads:
-        name = lead['name']
-        ort = lead['city']
-        # Check for duplicates by name+ort
-        is_duplicate = any(
-            l['name'].lower().strip() == name.lower().strip() and l['ort'].lower().strip() == ort.lower().strip()
-            for l in data['leads']
-        )
-        if not is_duplicate:
-            new_id = name.lower().replace(' ', '-').replace('gmbh', '').strip('-')
-            data['leads'].append({
-                'id': new_id,
-                'name': name,
-                'branche': lead['category'],
-                'ort': ort,
-                'score': lead['score'],
-                'has_website': lead['has_website'],
-                'website_age': None,
-                'mobile_friendly': None,
-                'has_ssl': None,
-                'social_active': True if lead['review_count'] and lead['review_count'] > 50 else False,
-                'status': 'new',
-                'created_at': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-                'built_at': None,
-                'deployed_at': None,
-                'outreach_sent': False,
-                'url': None
-            })
-            added += 1
+# Load neue Leads
+with open('leads/qualified_leads.json', 'r') as f:
+    new_leads = json.load(f)
 
-    data['stats']['total_leads'] = len(data['leads'])
-    data['stats']['approved'] = len([l for l in data['leads'] if l['score'] >= 70])
-    data['last_updated'] = datetime.now(timezone.utc).isoformat()
+added = []
+for lead in new_leads:
+    name = lead['name']
+    ort = lead['city']
+    score = lead['score']
 
-    with open('data/leads.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+    if (name, ort) in existing:
+        print(f"SKIP (Duplikat): {name} in {ort}")
+        continue
+    if score < 70:
+        print(f"SKIP (Score <70): {name} Score={score}")
+        continue
 
-    print(f'Added {added} new leads')
+    new_id = name.lower().replace(' ', '-').replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+    entry = {
+        'id': new_id,
+        'name': name,
+        'branche': lead['category'],
+        'ort': ort,
+        'score': score,
+        'has_website': lead['has_website'],
+        'website_age': None,
+        'mobile_friendly': None,
+        'has_ssl': None,
+        'social_active': True,  # Demo-Annahme
+        'status': 'approved',
+        'created_at': datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00', 'Z'),
+        'built_at': None,
+        'deployed_at': None,
+        'outreach_sent': False,
+        'url': None
+    }
+    data['leads'].append(entry)
+    added.append(entry)
+    print(f"ADD: {name} Score={score}")
 
-if __name__ == '__main__':
-    main()
+data['last_updated'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+data['stats']['total_leads'] = len(data['leads'])
+data['stats']['approved'] = sum(1 for l in data['leads'] if l['status'] in ('approved', 'live'))
+
+with open('data/leads.json', 'w') as f:
+    json.dump(data, f, indent=2, ensure_ascii=False)
+
+print(f"\nGesamt: {len(added)} neue Leads hinzugefügt")
