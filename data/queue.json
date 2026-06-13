@@ -41,6 +41,14 @@
       "retry_count": 0,
       "last_action": "2026-05-13T00:02:00Z",
       "next_action": null
+    },
+    {
+      "id": "baeckerei-schmidt",
+      "status": "live",
+      "stage": "completed",
+      "retry_count": 0,
+      "last_action": "2026-06-13T18:00:00Z",
+      "next_action": null
     }
   ],
   "pending_builds": [],
