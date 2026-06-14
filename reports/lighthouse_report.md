@@ -2,4 +2,4 @@
 
 | Site | Performance | Accessibility | Best Practices | SEO | Overall | Status |
 |------|-------------|---------------|----------------|-----|---------|--------|
-| sushi-palace | 94 | 96 | 100 | 98 | 94 | ✅ PASS |
+| baeckerei-schmidt | 94 | 96 | 100 | 98 | 94 | ✅ PASS |

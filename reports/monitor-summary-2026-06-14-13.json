@@ -1,0 +1,102 @@
+{
+  "timestamp": "2026-06-14T13:02:11Z",
+  "checked_sites": 6,
+  "live_sites": 6,
+  "results": [
+    {
+      "slug": "trattoria-bella-vista",
+      "status": "live",
+      "http_code": 200,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "alert": false
+    },
+    {
+      "slug": "curry-house",
+      "status": "live",
+      "http_code": 200,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "alert": false
+    },
+    {
+      "slug": "mueller-elektro",
+      "status": "live",
+      "http_code": 404,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "alert": true,
+      "alert_reason": "HTTP 404 - Site not reachable"
+    },
+    {
+      "slug": "pizza-roma",
+      "status": "live",
+      "http_code": 404,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "alert": true,
+      "alert_reason": "HTTP 404 - Site not reachable"
+    },
+    {
+      "slug": "sushi-palace",
+      "status": "live",
+      "http_code": 404,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "alert": true,
+      "alert_reason": "HTTP 404 - Site not reachable"
+    },
+    {
+      "slug": "baeckerei-schmidt",
+      "status": "live",
+      "http_code": 404,
+      "lighthouse": {
+        "performance": 94,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 98,
+        "pwa": 65,
+        "overall": 94
+      },
+      "alert": true,
+      "alert_reason": "HTTP 404 - Site not reachable"
+    }
+  ],
+  "summary": {
+    "http_ok": 2,
+    "http_alert": 4,
+    "lighthouse_ok": 6,
+    "lighthouse_alert": 0,
+    "total_alerts": 4
+  }
+}
