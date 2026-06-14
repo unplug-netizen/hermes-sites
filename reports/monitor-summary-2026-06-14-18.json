@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-14T18:01:23.072425+00:00",
+  "timestamp": "2026-06-14T18:01:26.939242+00:00",
   "sites": {
     "trattoria-bella-vista": {
       "http_status": 200,
@@ -7,13 +7,13 @@
       "lighthouse": {
         "slug": "trattoria-bella-vista",
         "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
-        "timestamp": "2026-06-14T18:02:05.670706+00:00",
+        "timestamp": "2026-06-14T18:02:11.736569+00:00",
         "scores": {
-          "performance": 54,
+          "performance": 56,
           "accessibility": 91,
           "best-practices": 96,
           "seo": 100,
-          "overall": 85
+          "overall": 86
         },
         "passed": false
       }
@@ -22,7 +22,17 @@
       "http_status": 200,
       "http_ok": true,
       "lighthouse": {
-        "error": "division by zero"
+        "slug": "curry-house",
+        "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+        "timestamp": "2026-06-14T18:02:31.572728+00:00",
+        "scores": {
+          "performance": 71,
+          "accessibility": 91,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 90
+        },
+        "passed": true
       }
     },
     "mueller-elektro": {
@@ -55,13 +65,12 @@
     }
   },
   "alerts": [
-    "trattoria-bella-vista: Lighthouse Score 85",
-    "curry-house: Lighthouse Fehler",
+    "trattoria-bella-vista: Lighthouse Score 86",
     "mueller-elektro: HTTP 404",
     "pizza-roma: HTTP 404",
     "sushi-palace: HTTP 404",
     "baeckerei-schmidt: HTTP 404"
   ],
   "total_sites": 6,
-  "alerts_count": 6
+  "alerts_count": 5
 }
