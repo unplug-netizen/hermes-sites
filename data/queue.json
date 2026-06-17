@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-06-13T18:02:03Z",
+  "last_updated": "2026-06-17T18:06:13Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -48,6 +48,30 @@
       "stage": "completed",
       "retry_count": 0,
       "last_action": "2026-06-13T18:00:00Z",
+      "next_action": null
+    },
+    {
+      "id": "trattoria-bella-vista-hamburg",
+      "status": "live",
+      "stage": "completed",
+      "retry_count": 0,
+      "last_action": "2026-06-17T18:06:13Z",
+      "next_action": null
+    },
+    {
+      "id": "curry-house-hamburg",
+      "status": "live",
+      "stage": "completed",
+      "retry_count": 0,
+      "last_action": "2026-06-17T18:06:13Z",
+      "next_action": null
+    },
+    {
+      "id": "pizza-roma-hamburg",
+      "status": "live",
+      "stage": "completed",
+      "retry_count": 0,
+      "last_action": "2026-06-17T18:06:13Z",
       "next_action": null
     }
   ],
