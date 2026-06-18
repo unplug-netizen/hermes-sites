@@ -1,18 +1,38 @@
 {
-  "timestamp": "2026-06-18T07:01:06.969475+00:00",
+  "timestamp": "2026-06-18T07:07:43.057337+00:00",
   "sites": {
     "trattoria-bella-vista": {
       "http_status": 200,
       "http_ok": true,
       "lighthouse": {
-        "error": "Command '['lighthouse', 'https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/', '--output=json', '--output-path', 'reports/trattoria-bella-vista-lighthouse.json', '--chrome-flags=--headless --no-sandbox --disable-gpu', '--only-categories=performance,accessibility,best-practices,seo', '--preset=desktop', '--max-wait-for-load=60000']' timed out after 120 seconds"
+        "slug": "trattoria-bella-vista",
+        "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+        "timestamp": "2026-06-18T07:07:15.351859+00:00",
+        "scores": {
+          "performance": 93,
+          "accessibility": 91,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 95
+        },
+        "passed": true
       }
     },
     "curry-house": {
       "http_status": 200,
       "http_ok": true,
       "lighthouse": {
-        "error": "Command '['lighthouse', 'https://unplug-netizen.github.io/hermes-sites/curry-house/', '--output=json', '--output-path', 'reports/curry-house-lighthouse.json', '--chrome-flags=--headless --no-sandbox --disable-gpu', '--only-categories=performance,accessibility,best-practices,seo', '--preset=desktop', '--max-wait-for-load=60000']' timed out after 120 seconds"
+        "slug": "curry-house",
+        "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+        "timestamp": "2026-06-18T07:07:15.355739+00:00",
+        "scores": {
+          "performance": 99,
+          "accessibility": 91,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 96
+        },
+        "passed": true
       }
     },
     "mueller-elektro": {
@@ -66,8 +86,6 @@
     }
   },
   "alerts": [
-    "trattoria-bella-vista: Lighthouse Fehler",
-    "curry-house: Lighthouse Fehler",
     "mueller-elektro: HTTP 404",
     "pizza-roma: HTTP 404",
     "sushi-palace: HTTP 404",
@@ -77,5 +95,5 @@
     "pizza-roma-hamburg: HTTP 404"
   ],
   "total_sites": 9,
-  "alerts_count": 9
+  "alerts_count": 7
 }
