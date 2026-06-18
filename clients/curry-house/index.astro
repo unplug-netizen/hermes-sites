@@ -1,13 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero.astro';
-import About from '../../components/About.astro';
-import Services from '../../components/Services.astro';
-import Gallery from '../../components/Gallery.astro';
-import Contact from '../../components/Contact.astro';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Gallery from '../components/Gallery.astro';
+import Contact from '../components/Contact.astro';
+
+// Lead-Daten laden
+import leadData from '../data/lead.json';
 
 // Generierte Inhalte
-import siteData from '../../data/site.json';
+import siteData from '../data/site.json';
 ---
 
 <Layout 

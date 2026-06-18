@@ -1,33 +1,33 @@
 {
   "business": {
     "name": "Trattoria Bella Vista",
-    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Berli",
-    "address": "Berlin",
+    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Hambu",
+    "address": "Hamburg",
     "phone": "030-12345678",
     "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
     "category": "restaurant",
-    "city": "Berlin"
+    "city": "Hamburg"
   },
   "content": {
     "seo": {
-      "title": "Trattoria Bella Vista - Professionelle Services in Berlin",
-      "description": "Trattoria Bella Vista bietet erstklassige Leistungen in Berlin. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Berlin.",
+      "title": "Trattoria Bella Vista - Professionelle Services in Hamburg",
+      "description": "Trattoria Bella Vista bietet erstklassige Leistungen in Hamburg. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Hamburg.",
       "keywords": [
         "restaurant",
         "essen",
         "gastronomie",
         "tisch reservieren",
-        "berlin"
+        "hamburg"
       ]
     },
     "hero": {
       "title": "Willkommen bei Trattoria Bella Vista",
-      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Berlin",
+      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Hamburg",
       "cta": "Tisch reservieren"
     },
     "about": {
       "title": "Über uns",
-      "text": "Seit Jahren steht Trattoria Bella Vista für authentische Küche und gemütliche Atmosphäre in Berlin. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
+      "text": "Seit Jahren steht Trattoria Bella Vista für authentische Küche und gemütliche Atmosphäre in Hamburg. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
     },
     "services": {
       "title": "Unsere Spezialitäten",
