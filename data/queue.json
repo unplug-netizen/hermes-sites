@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-06-23T12:01:57Z",
+  "last_updated": "2026-06-23T12:12:21Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -76,27 +76,27 @@
     },
     {
       "id": "trattoria-bella-vista-münchen",
-      "status": "built",
-      "stage": "build_complete",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
       "last_action": "2026-06-23T12:01:57Z",
-      "next_action": "build"
+      "next_action": null
     },
     {
       "id": "curry-house-münchen",
-      "status": "built",
-      "stage": "build_complete",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
       "last_action": "2026-06-23T12:01:57Z",
-      "next_action": "build"
+      "next_action": null
     },
     {
       "id": "pizza-roma-münchen",
-      "status": "built",
-      "stage": "build_complete",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
       "last_action": "2026-06-23T12:01:57Z",
-      "next_action": "build"
+      "next_action": null
     }
   ],
   "pending_builds": [],
