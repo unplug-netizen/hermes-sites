@@ -1,33 +1,33 @@
 {
   "business": {
     "name": "Curry House",
-    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Hambu",
-    "address": "Hamburg",
+    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Münch",
+    "address": "München",
     "phone": "030-12345678",
     "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
     "category": "restaurant",
-    "city": "Hamburg"
+    "city": "München"
   },
   "content": {
     "seo": {
-      "title": "Curry House - Professionelle Services in Hamburg",
-      "description": "Curry House bietet erstklassige Leistungen in Hamburg. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Hamburg.",
+      "title": "Curry House - Professionelle Services in München",
+      "description": "Curry House bietet erstklassige Leistungen in München. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der München.",
       "keywords": [
         "restaurant",
         "essen",
         "gastronomie",
         "tisch reservieren",
-        "hamburg"
+        "münchen"
       ]
     },
     "hero": {
       "title": "Willkommen bei Curry House",
-      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Hamburg",
+      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in München",
       "cta": "Tisch reservieren"
     },
     "about": {
       "title": "Über uns",
-      "text": "Seit Jahren steht Curry House für authentische Küche und gemütliche Atmosphäre in Hamburg. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
+      "text": "Seit Jahren steht Curry House für authentische Küche und gemütliche Atmosphäre in München. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
     },
     "services": {
       "title": "Unsere Spezialitäten",
