@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-06-22T06:00:00+00:00",
+  "last_updated": "2026-06-23T06:02:29.922237+00:00",
   "leads": [
     {
       "id": "trattoria-bella-vista",
@@ -145,11 +145,65 @@
       "deployed_at": "2026-06-20T06:02:00Z",
       "outreach_sent": true,
       "url": "https://unplug-netizen.github.io/hermes-sites/pizza-roma-hamburg/"
+    },
+    {
+      "id": "trattoria-bella-vista-münchen",
+      "name": "Trattoria Bella Vista",
+      "branche": "restaurant",
+      "ort": "München",
+      "score": 100,
+      "has_website": false,
+      "website_age": null,
+      "mobile_friendly": null,
+      "has_ssl": null,
+      "social_active": true,
+      "status": "approved",
+      "created_at": "2026-06-23T06:02:29.922140Z",
+      "built_at": null,
+      "deployed_at": null,
+      "outreach_sent": false,
+      "url": null
+    },
+    {
+      "id": "curry-house-münchen",
+      "name": "Curry House",
+      "branche": "restaurant",
+      "ort": "München",
+      "score": 100,
+      "has_website": false,
+      "website_age": null,
+      "mobile_friendly": null,
+      "has_ssl": null,
+      "social_active": true,
+      "status": "approved",
+      "created_at": "2026-06-23T06:02:29.922198Z",
+      "built_at": null,
+      "deployed_at": null,
+      "outreach_sent": false,
+      "url": null
+    },
+    {
+      "id": "pizza-roma-münchen",
+      "name": "Pizza Roma",
+      "branche": "restaurant",
+      "ort": "München",
+      "score": 95,
+      "has_website": false,
+      "website_age": null,
+      "mobile_friendly": null,
+      "has_ssl": null,
+      "social_active": true,
+      "status": "approved",
+      "created_at": "2026-06-23T06:02:29.922210Z",
+      "built_at": null,
+      "deployed_at": null,
+      "outreach_sent": false,
+      "url": null
     }
   ],
   "stats": {
-    "total_leads": 8,
-    "approved": 8,
+    "total_leads": 11,
+    "approved": 3,
     "built": 5,
     "live": 8,
     "outreach_pending": 0
