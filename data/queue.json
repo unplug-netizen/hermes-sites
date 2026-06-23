@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-06-23T08:01:14Z",
+  "last_updated": "2026-06-23T12:01:57Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -79,7 +79,7 @@
       "status": "built",
       "stage": "build_complete",
       "retry_count": 0,
-      "last_action": "2026-06-23T08:01:06Z",
+      "last_action": "2026-06-23T12:01:57Z",
       "next_action": "build"
     },
     {
@@ -87,7 +87,7 @@
       "status": "built",
       "stage": "build_complete",
       "retry_count": 0,
-      "last_action": "2026-06-23T08:01:11Z",
+      "last_action": "2026-06-23T12:01:57Z",
       "next_action": "build"
     },
     {
@@ -95,7 +95,7 @@
       "status": "built",
       "stage": "build_complete",
       "retry_count": 0,
-      "last_action": "2026-06-23T08:01:12Z",
+      "last_action": "2026-06-23T12:01:57Z",
       "next_action": "build"
     }
   ],

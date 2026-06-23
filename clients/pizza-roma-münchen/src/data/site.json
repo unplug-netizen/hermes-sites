@@ -1,0 +1,72 @@
+{
+  "business": {
+    "name": "Pizza Roma München",
+    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Münch",
+    "address": "Sendlinger Straße 12, München",
+    "phone": "089-11223344",
+    "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
+    "category": "restaurant",
+    "city": "München"
+  },
+  "content": {
+    "seo": {
+      "title": "Pizza Roma München - Professionelle Services in München",
+      "description": "Pizza Roma München bietet erstklassige Leistungen in München. Kontaktieren Sie uns unter 089-11223344 oder besuchen Sie uns in der Sendlinger Straße 12, München.",
+      "keywords": [
+        "restaurant",
+        "essen",
+        "gastronomie",
+        "tisch reservieren",
+        "münchen"
+      ]
+    },
+    "hero": {
+      "title": "Willkommen bei Pizza Roma München",
+      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in München",
+      "cta": "Tisch reservieren"
+    },
+    "about": {
+      "title": "Über uns",
+      "text": "Seit Jahren steht Pizza Roma München für authentische Küche und gemütliche Atmosphäre in München. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
+    },
+    "services": {
+      "title": "Unsere Spezialitäten",
+      "items": [
+        {
+          "name": "Hausgemachte Spezialitäten",
+          "description": "Frisch zubereitete Gerichte nach traditionellen Rezepten",
+          "price": "ab 12,90 €",
+          "icon": "🍽️"
+        },
+        {
+          "name": "Tagesgerichte",
+          "description": "Wechselnde Spezialitäten mit saisonalen Zutaten",
+          "price": "ab 9,90 €",
+          "icon": "🥘"
+        },
+        {
+          "name": "Catering-Service",
+          "description": "Perfekte Verpflegung für Ihre Veranstaltungen",
+          "price": "auf Anfrage",
+          "icon": "🎉"
+        }
+      ]
+    },
+    "gallery": {
+      "title": "Impressionen"
+    },
+    "contact": {
+      "title": "Besuchen Sie uns"
+    }
+  },
+  "assets": {
+    "hero_image": "https://source.unsplash.com/1920x1080/?restaurant-food",
+    "about_image": "https://source.unsplash.com/800x600/?restaurant-food,interior",
+    "gallery_images": [
+      "https://source.unsplash.com/600x600/?restaurant-food,work",
+      "https://source.unsplash.com/600x600/?restaurant-food,team",
+      "https://source.unsplash.com/600x600/?restaurant-food,service",
+      "https://source.unsplash.com/600x600/?restaurant-food,detail"
+    ]
+  }
+}
