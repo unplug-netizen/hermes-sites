@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-07-17T12:02:27.370221+00:00",
+  "timestamp": "2026-07-17T12:04:08.865641+00:00",
   "sites": {
     "trattoria-bella-vista": {
       "http_status": 200,
       "http_ok": true,
       "lighthouse": {
-        "error": "division by zero"
+        "error": "'>=' not supported between instances of 'NoneType' and 'int'"
       }
     },
     "curry-house": {
       "http_status": 200,
       "http_ok": true,
       "lighthouse": {
-        "error": "division by zero"
+        "error": "'>=' not supported between instances of 'NoneType' and 'int'"
       }
     },
     "mueller-elektro": {
