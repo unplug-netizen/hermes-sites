@@ -1,18 +1,38 @@
 {
-  "timestamp": "2026-07-17T12:04:08.865641+00:00",
+  "timestamp": "2026-07-17T12:10:33.973804+00:00",
   "sites": {
     "trattoria-bella-vista": {
       "http_status": 200,
       "http_ok": true,
       "lighthouse": {
-        "error": "'>=' not supported between instances of 'NoneType' and 'int'"
+        "slug": "trattoria-bella-vista",
+        "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+        "timestamp": "2026-07-17T12:11:31.270558+00:00",
+        "scores": {
+          "performance": 52,
+          "accessibility": 90,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 84
+        },
+        "passed": false
       }
     },
     "curry-house": {
       "http_status": 200,
       "http_ok": true,
       "lighthouse": {
-        "error": "'>=' not supported between instances of 'NoneType' and 'int'"
+        "slug": "curry-house",
+        "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+        "timestamp": "2026-07-17T12:12:18.966160+00:00",
+        "scores": {
+          "performance": 52,
+          "accessibility": 90,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 84
+        },
+        "passed": false
       }
     },
     "mueller-elektro": {
@@ -87,8 +107,8 @@
     }
   },
   "alerts": [
-    "trattoria-bella-vista: Lighthouse Fehler",
-    "curry-house: Lighthouse Fehler",
+    "trattoria-bella-vista: Lighthouse Score 84",
+    "curry-house: Lighthouse Score 84",
     "mueller-elektro: HTTP 404",
     "pizza-roma: HTTP 404",
     "sushi-palace: HTTP 404",
