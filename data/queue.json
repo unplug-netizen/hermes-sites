@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-07-17T12:01:35Z",
+  "last_updated": "2026-07-18T08:02:10Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -97,6 +97,30 @@
       "retry_count": 0,
       "last_action": "2026-06-23T12:01:57Z",
       "next_action": null
+    },
+    {
+      "id": "trattoria-bella-vista-köln",
+      "status": "built",
+      "stage": "build_complete",
+      "retry_count": 0,
+      "last_action": "2026-07-18T08:01:20Z",
+      "next_action": "build"
+    },
+    {
+      "id": "curry-house-köln",
+      "status": "built",
+      "stage": "build_complete",
+      "retry_count": 0,
+      "last_action": "2026-07-18T08:01:43Z",
+      "next_action": "build"
+    },
+    {
+      "id": "pizza-roma-köln",
+      "status": "built",
+      "stage": "build_complete",
+      "retry_count": 0,
+      "last_action": "2026-07-18T08:01:57Z",
+      "next_action": "build"
     }
   ],
   "pending_builds": [],

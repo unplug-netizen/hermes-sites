@@ -1,33 +1,33 @@
 {
   "business": {
     "name": "Pizza Roma",
-    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Münch",
-    "address": "München",
+    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Köln",
+    "address": "Köln",
     "phone": "030-12345678",
     "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
     "category": "restaurant",
-    "city": "München"
+    "city": "Köln"
   },
   "content": {
     "seo": {
-      "title": "Pizza Roma - Professionelle Services in München",
-      "description": "Pizza Roma bietet erstklassige Leistungen in München. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der München.",
+      "title": "Pizza Roma - Professionelle Services in Köln",
+      "description": "Pizza Roma bietet erstklassige Leistungen in Köln. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Köln.",
       "keywords": [
         "restaurant",
         "essen",
         "gastronomie",
         "tisch reservieren",
-        "münchen"
+        "köln"
       ]
     },
     "hero": {
       "title": "Willkommen bei Pizza Roma",
-      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in München",
+      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Köln",
       "cta": "Tisch reservieren"
     },
     "about": {
       "title": "Über uns",
-      "text": "Seit Jahren steht Pizza Roma für authentische Küche und gemütliche Atmosphäre in München. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
+      "text": "Seit Jahren steht Pizza Roma für authentische Küche und gemütliche Atmosphäre in Köln. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
     },
     "services": {
       "title": "Unsere Spezialitäten",
