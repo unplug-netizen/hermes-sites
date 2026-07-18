@@ -1,0 +1,125 @@
+{
+  "timestamp": "2026-07-18T06:02:41.681589+00:00",
+  "sites": {
+    "trattoria-bella-vista": {
+      "http_status": 200,
+      "http_ok": true,
+      "lighthouse": {
+        "slug": "trattoria-bella-vista",
+        "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista/",
+        "timestamp": "2026-07-18T06:03:40.167334+00:00",
+        "scores": {
+          "performance": 52,
+          "accessibility": 90,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 84
+        },
+        "passed": false
+      }
+    },
+    "curry-house": {
+      "http_status": 200,
+      "http_ok": true,
+      "lighthouse": {
+        "slug": "curry-house",
+        "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
+        "timestamp": "2026-07-18T06:04:28.073160+00:00",
+        "scores": {
+          "performance": 53,
+          "accessibility": 90,
+          "best-practices": 96,
+          "seo": 100,
+          "overall": 85
+        },
+        "passed": false
+      }
+    },
+    "mueller-elektro": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "pizza-roma": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "sushi-palace": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "baeckerei-schmidt": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "trattoria-bella-vista-hamburg": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "curry-house-hamburg": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "pizza-roma-hamburg": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "trattoria-bella-vista-münchen": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "curry-house-münchen": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    },
+    "pizza-roma-münchen": {
+      "http_status": 404,
+      "http_ok": false,
+      "lighthouse": {
+        "error": "skipped due to HTTP error"
+      }
+    }
+  },
+  "alerts": [
+    "trattoria-bella-vista: Lighthouse Score 84",
+    "curry-house: Lighthouse Score 85",
+    "mueller-elektro: HTTP 404",
+    "pizza-roma: HTTP 404",
+    "sushi-palace: HTTP 404",
+    "baeckerei-schmidt: HTTP 404",
+    "trattoria-bella-vista-hamburg: HTTP 404",
+    "curry-house-hamburg: HTTP 404",
+    "pizza-roma-hamburg: HTTP 404",
+    "trattoria-bella-vista-münchen: HTTP 404",
+    "curry-house-münchen: HTTP 404",
+    "pizza-roma-münchen: HTTP 404"
+  ],
+  "total_sites": 12,
+  "alerts_count": 12
+}
