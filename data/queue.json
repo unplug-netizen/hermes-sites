@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-07-18T08:02:10Z",
+  "last_updated": "2026-07-18T08:02:49Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -75,7 +75,7 @@
       "next_action": null
     },
     {
-      "id": "trattoria-bella-vista-münchen",
+      "id": "trattoria-bella-vista-m\u00fcnchen",
       "status": "live",
       "stage": "completed",
       "retry_count": 0,
@@ -83,7 +83,7 @@
       "next_action": null
     },
     {
-      "id": "curry-house-münchen",
+      "id": "curry-house-m\u00fcnchen",
       "status": "live",
       "stage": "completed",
       "retry_count": 0,
@@ -91,7 +91,7 @@
       "next_action": null
     },
     {
-      "id": "pizza-roma-münchen",
+      "id": "pizza-roma-m\u00fcnchen",
       "status": "live",
       "stage": "completed",
       "retry_count": 0,
@@ -99,28 +99,28 @@
       "next_action": null
     },
     {
-      "id": "trattoria-bella-vista-köln",
-      "status": "built",
-      "stage": "build_complete",
+      "id": "trattoria-bella-vista-k\u00f6ln",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
-      "last_action": "2026-07-18T08:01:20Z",
-      "next_action": "build"
+      "last_action": "2026-07-18T08:02:49Z",
+      "next_action": null
     },
     {
-      "id": "curry-house-köln",
-      "status": "built",
-      "stage": "build_complete",
+      "id": "curry-house-k\u00f6ln",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
-      "last_action": "2026-07-18T08:01:43Z",
-      "next_action": "build"
+      "last_action": "2026-07-18T08:02:49Z",
+      "next_action": null
     },
     {
-      "id": "pizza-roma-köln",
-      "status": "built",
-      "stage": "build_complete",
+      "id": "pizza-roma-k\u00f6ln",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
-      "last_action": "2026-07-18T08:01:57Z",
-      "next_action": "build"
+      "last_action": "2026-07-18T08:02:49Z",
+      "next_action": null
     }
   ],
   "pending_builds": [],
