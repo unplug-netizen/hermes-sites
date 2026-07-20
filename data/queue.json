@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-07-20T16:04:37Z",
+  "last_updated": "2026-07-20T18:01:44Z",
   "queue": [
     {
       "id": "trattoria-bella-vista",
@@ -124,26 +124,26 @@
     },
     {
       "id": "trattoria-bella-vista-frankfurt",
-      "status": "built",
-      "stage": "build_complete",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
-      "last_action": "2026-07-20T16:04:09Z",
+      "last_action": "2026-07-20T18:01:44Z",
       "next_action": null
     },
     {
       "id": "curry-house-frankfurt",
-      "status": "built",
-      "stage": "build_complete",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
-      "last_action": "2026-07-20T16:04:23Z",
+      "last_action": "2026-07-20T18:01:44Z",
       "next_action": null
     },
     {
       "id": "pizza-roma-frankfurt",
-      "status": "built",
-      "stage": "build_complete",
+      "status": "live",
+      "stage": "completed",
       "retry_count": 0,
-      "last_action": "2026-07-20T16:04:37Z",
+      "last_action": "2026-07-20T18:01:44Z",
       "next_action": null
     },
     {
