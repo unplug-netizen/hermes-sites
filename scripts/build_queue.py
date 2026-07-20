@@ -67,7 +67,8 @@ def build_site(business_slug, lead_data):
             "--phone", phone,
             "--city", city,
             "--template", str(template_dir),
-            "--output", str(output_dir)
+            "--output", str(output_dir),
+            "--slug", business_slug
         ],
         capture_output=True,
         text=True,

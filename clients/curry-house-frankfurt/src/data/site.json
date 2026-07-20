@@ -1,0 +1,72 @@
+{
+  "business": {
+    "name": "Curry House",
+    "tagline": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Frank",
+    "address": "Frankfurt",
+    "phone": "030-12345678",
+    "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
+    "category": "restaurant",
+    "city": "Frankfurt"
+  },
+  "content": {
+    "seo": {
+      "title": "Curry House - Professionelle Services in Frankfurt",
+      "description": "Curry House bietet erstklassige Leistungen in Frankfurt. Kontaktieren Sie uns unter 030-12345678 oder besuchen Sie uns in der Frankfurt.",
+      "keywords": [
+        "restaurant",
+        "essen",
+        "gastronomie",
+        "tisch reservieren",
+        "frankfurt"
+      ]
+    },
+    "hero": {
+      "title": "Willkommen bei Curry House",
+      "subtitle": "Authentische Küche mit frischen Zutaten und herzlicher Gastfreundschaft in Frankfurt",
+      "cta": "Tisch reservieren"
+    },
+    "about": {
+      "title": "Über uns",
+      "text": "Seit Jahren steht Curry House für authentische Küche und gemütliche Atmosphäre in Frankfurt. Unser engagiertes Team verwendet nur die frischesten Zutaten und kocht mit Leidenschaft. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
+    },
+    "services": {
+      "title": "Unsere Spezialitäten",
+      "items": [
+        {
+          "name": "Hausgemachte Spezialitäten",
+          "description": "Frisch zubereitete Gerichte nach traditionellen Rezepten",
+          "price": "ab 12,90 €",
+          "icon": "🍽️"
+        },
+        {
+          "name": "Tagesgerichte",
+          "description": "Wechselnde Spezialitäten mit saisonalen Zutaten",
+          "price": "ab 9,90 €",
+          "icon": "🥘"
+        },
+        {
+          "name": "Catering-Service",
+          "description": "Perfekte Verpflegung für Ihre Veranstaltungen",
+          "price": "auf Anfrage",
+          "icon": "🎉"
+        }
+      ]
+    },
+    "gallery": {
+      "title": "Impressionen"
+    },
+    "contact": {
+      "title": "Besuchen Sie uns"
+    }
+  },
+  "assets": {
+    "hero_image": "https://source.unsplash.com/1920x1080/?restaurant-food",
+    "about_image": "https://source.unsplash.com/800x600/?restaurant-food,interior",
+    "gallery_images": [
+      "https://source.unsplash.com/600x600/?restaurant-food,work",
+      "https://source.unsplash.com/600x600/?restaurant-food,team",
+      "https://source.unsplash.com/600x600/?restaurant-food,service",
+      "https://source.unsplash.com/600x600/?restaurant-food,detail"
+    ]
+  }
+}

@@ -146,13 +146,14 @@ class SiteBuilder:
         self.template_dir = template_dir
         self.output_dir = output_dir
         self.content_gen = ContentGenerator()
-        
+        self.output_slug = None
+    
     def build(self, business: Business) -> Path:
         """Baue komplette Website"""
         print(f"🏗️  Baue Website für: {business.name}")
         
         # 1. Output-Verzeichnis erstellen
-        site_dir = self.output_dir / self._slugify(business.name)
+        site_dir = self.output_dir / (self.output_slug or self._slugify(business.name))
         site_dir.mkdir(parents=True, exist_ok=True)
         
         # 2. Template kopieren
@@ -274,6 +275,7 @@ def main():
     parser.add_argument("--city", default="Berlin", help="Stadt")
     parser.add_argument("--template", default="./templates/restaurant", help="Template-Verzeichnis")
     parser.add_argument("--output", default="./clients", help="Output-Verzeichnis")
+    parser.add_argument("--slug", default=None, help="Verzeichnis-Slug (optional, default: aus Name generiert)")
     
     args = parser.parse_args()
     
@@ -289,6 +291,7 @@ def main():
         template_dir=Path(args.template),
         output_dir=Path(args.output)
     )
+    builder.output_slug = args.slug
     
     site_path = builder.build(business)
     print(f"\n🌐 Website bereit: {site_path}")
