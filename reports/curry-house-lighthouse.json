@@ -1,13 +1,13 @@
 {
   "slug": "curry-house",
   "url": "https://unplug-netizen.github.io/hermes-sites/curry-house/",
-  "timestamp": "2026-07-20T07:03:14.873953+00:00",
+  "timestamp": "2026-07-20T08:03:35.374693+00:00",
   "scores": {
-    "performance": 60,
+    "performance": 55,
     "accessibility": 90,
     "best-practices": 96,
     "seo": 100,
-    "overall": 86
+    "overall": 85
   },
   "passed": false
 }
