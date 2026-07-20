@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-07-20T06:02:56.168021Z",
+  "last_updated": "2026-07-20T09:13:41.868789+00:00",
   "leads": [
     {
       "id": "trattoria-bella-vista",
@@ -49,12 +49,12 @@
       "mobile_friendly": null,
       "has_ssl": null,
       "social_active": false,
-      "status": "live",
+      "status": "built",
       "created_at": "2026-05-06T18:00:00Z",
       "built_at": "2026-05-06T18:05:00Z",
       "deployed_at": "2026-05-06T18:08:00Z",
       "outreach_sent": true,
-      "url": "https://unplug-netizen.github.io/hermes-sites/mueller-elektro/"
+      "url": null
     },
     {
       "id": "pizza-roma",
@@ -67,12 +67,12 @@
       "mobile_friendly": null,
       "has_ssl": null,
       "social_active": true,
-      "status": "live",
+      "status": "built",
       "created_at": "2026-05-08T06:00:00Z",
       "built_at": "2026-05-08T12:01:00Z",
       "deployed_at": "2026-05-08T18:00:00Z",
       "outreach_sent": true,
-      "url": "https://unplug-netizen.github.io/hermes-sites/pizza-roma/"
+      "url": null
     },
     {
       "id": "sushi-palace",
@@ -85,12 +85,12 @@
       "mobile_friendly": null,
       "has_ssl": null,
       "social_active": true,
-      "status": "live",
+      "status": "built",
       "created_at": "2026-05-11T06:00:00Z",
       "built_at": "2026-05-11T08:08:00Z",
       "deployed_at": "2026-05-13T00:03:00Z",
       "outreach_sent": true,
-      "url": "https://unplug-netizen.github.io/hermes-sites/sushi-palace/"
+      "url": null
     },
     {
       "id": "trattoria-bella-vista-hamburg",
@@ -103,12 +103,12 @@
       "mobile_friendly": null,
       "has_ssl": null,
       "social_active": true,
-      "status": "live",
+      "status": "built",
       "created_at": "2026-06-17T16:05:49.717648Z",
       "built_at": "2026-06-17T16:07:53Z",
       "deployed_at": "2026-06-20T06:02:00Z",
       "outreach_sent": true,
-      "url": "https://unplug-netizen.github.io/hermes-sites/trattoria-bella-vista-hamburg/"
+      "url": null
     },
     {
       "id": "curry-house-hamburg",
@@ -121,12 +121,12 @@
       "mobile_friendly": null,
       "has_ssl": null,
       "social_active": true,
-      "status": "live",
+      "status": "built",
       "created_at": "2026-06-17T16:05:49.717673Z",
       "built_at": "2026-06-17T16:07:55Z",
       "deployed_at": "2026-06-20T06:02:00Z",
       "outreach_sent": true,
-      "url": "https://unplug-netizen.github.io/hermes-sites/curry-house-hamburg/"
+      "url": null
     },
     {
       "id": "pizza-roma-hamburg",
@@ -139,12 +139,12 @@
       "mobile_friendly": null,
       "has_ssl": null,
       "social_active": true,
-      "status": "live",
+      "status": "built",
       "created_at": "2026-06-17T16:05:49.717681Z",
       "built_at": "2026-06-17T16:07:57Z",
       "deployed_at": "2026-06-20T06:02:00Z",
       "outreach_sent": true,
-      "url": "https://unplug-netizen.github.io/hermes-sites/pizza-roma-hamburg/"
+      "url": null
     },
     {
       "id": "trattoria-bella-vista-münchen",
@@ -366,8 +366,8 @@
   "stats": {
     "total_leads": 20,
     "approved": 6,
-    "built": 8,
-    "live": 8,
+    "built": 12,
+    "live": 2,
     "outreach_pending": 12
   }
 }

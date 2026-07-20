@@ -203,35 +203,70 @@ antworten Sie mit "ABMELDEN".*
         return email_file
 
 
+def load_lead_from_slug(slug: str) -> dict:
+    """Lade Lead-Daten aus data/leads.json anhand des Slugs."""
+    leads_file = Path(__file__).parent.parent / "data" / "leads.json"
+    if leads_file.exists():
+        with open(leads_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        for lead in data.get("leads", []):
+            if lead.get("id") == slug:
+                return {
+                    "name": lead.get("name", slug),
+                    "category": lead.get("branche", "restaurant"),
+                    "city": lead.get("ort", "Berlin"),
+                    "score": lead.get("score", 100),
+                    "email": lead.get("email", f"info@{slug.lower().replace(' ', '-').replace('.', '')}.de"),
+                }
+    # Fallback-Demo-Lead
+    return {
+        "name": slug.replace("-", " ").title(),
+        "category": "restaurant",
+        "city": "Berlin",
+        "score": 100,
+        "email": f"info@{slug.lower().replace(' ', '-').replace('.', '')}.de"
+    }
+
+
 def main():
     """CLI für Outreach"""
     import argparse
     
     parser = argparse.ArgumentParser(description="Hermes Outreach Generator")
-    parser.add_argument("--lead", required=True, help="Lead JSON file or name")
-    parser.add_argument("--site-url", required=True, help="URL der generierten Website")
+    parser.add_argument("slug", nargs="?", help="Slug der Live-Site (z. B. trattoria-bella-vista)")
+    parser.add_argument("--lead", help="Lead JSON file or name")
+    parser.add_argument("--site-url", help="URL der generierten Website")
     parser.add_argument("--output", default="./outreach", help="Output-Verzeichnis")
     
     args = parser.parse_args()
     
     # Lade Lead
-    lead_file = Path(args.lead)
-    if lead_file.exists():
-        with open(lead_file, "r", encoding="utf-8") as f:
-            lead = json.load(f)
+    if args.slug and not args.lead:
+        lead = load_lead_from_slug(args.slug)
+        site_url = args.site_url or f"https://unplug-netizen.github.io/hermes-sites/{args.slug}/"
+    elif args.lead:
+        lead_file = Path(args.lead)
+        if lead_file.exists():
+            with open(lead_file, "r", encoding="utf-8") as f:
+                lead = json.load(f)
+        else:
+            lead = {
+                "name": args.lead,
+                "category": "restaurant",
+                "city": "Berlin",
+                "score": 100,
+                "email": f"info@{args.lead.lower().replace(' ', '-').replace('.', '')}.de"
+            }
+        site_url = args.site_url
     else:
-        # Demo-Lead
-        lead = {
-            "name": args.lead,
-            "category": "restaurant",
-            "city": "Berlin",
-            "score": 100,
-            "email": f"info@{args.lead.lower().replace(' ', '-').replace('.', '')}.de"
-        }
+        parser.error("Bitte entweder einen Slug angeben oder --lead verwenden.")
+    
+    if not site_url:
+        parser.error("--site-url ist erforderlich, wenn kein Slug übergeben wird.")
     
     # Generiere Outreach
     generator = OutreachGenerator()
-    email = generator.generate_email(lead, args.site_url)
+    email = generator.generate_email(lead, site_url)
     
     # Speichern
     output_path = Path(args.output)
