@@ -1,0 +1,72 @@
+{
+  "business": {
+    "name": "Sushi Palace",
+    "tagline": "Authentische japanische Küche mit frischem Sushi und herzlicher Gastfreundschaft in Berli",
+    "address": "Musterstraße 5, Berlin",
+    "phone": "030-98765432",
+    "hours": "Mo-Fr: 09:00 - 18:00 Uhr",
+    "category": "restaurant",
+    "city": "Berlin"
+  },
+  "content": {
+    "seo": {
+      "title": "Sushi Palace - Professionelle Services in Berlin",
+      "description": "Sushi Palace bietet erstklassige Leistungen in Berlin. Kontaktieren Sie uns unter 030-98765432 oder besuchen Sie uns in der Musterstraße 5, Berlin.",
+      "keywords": [
+        "restaurant",
+        "essen",
+        "gastronomie",
+        "tisch reservieren",
+        "berlin"
+      ]
+    },
+    "hero": {
+      "title": "Willkommen bei Sushi Palace",
+      "subtitle": "Authentische japanische Küche mit frischem Sushi und herzlicher Gastfreundschaft in Berlin",
+      "cta": "Tisch reservieren"
+    },
+    "about": {
+      "title": "Über uns",
+      "text": "Seit Jahren steht Sushi Palace für authentische japanische Küche und gemütliche Atmosphäre in Berlin. Unser engagiertes Team verwendet nur die frischesten Zutaten und bereitet Sushi mit Leidenschaft zu. Besuchen Sie uns und erleben Sie unvergessliche Geschmackserlebnisse."
+    },
+    "services": {
+      "title": "Unsere Spezialitäten",
+      "items": [
+        {
+          "name": "Frisches Sushi",
+          "description": "Handgerolltes Sushi mit täglich frischem Fisch",
+          "price": "ab 8,90 €",
+          "icon": "🍣"
+        },
+        {
+          "name": "Sashimi-Platte",
+          "description": "Premium Fischsorten in Scheiben serviert",
+          "price": "ab 14,90 €",
+          "icon": "🐟"
+        },
+        {
+          "name": "Catering-Service",
+          "description": "Perfekte Verpflegung für Ihre Veranstaltungen",
+          "price": "auf Anfrage",
+          "icon": "🎉"
+        }
+      ]
+    },
+    "gallery": {
+      "title": "Impressionen"
+    },
+    "contact": {
+      "title": "Besuchen Sie uns"
+    }
+  },
+  "assets": {
+    "hero_image": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1920&h=1080&fit=crop",
+    "about_image": "https://images.unsplash.com/photo-1553621042-f6e147245754?w=800&h=600&fit=crop",
+    "gallery_images": [
+      "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1553621042-f6e147245754?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=600&h=600&fit=crop"
+    ]
+  }
+}
